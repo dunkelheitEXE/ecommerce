@@ -1,0 +1,20 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: content-box;
+}
+
+:root {
+    --color-success: #40AA68;
+    --color-success-hover: #3B9B5F;
+    --color-danger: #CA4F4F;
+    --color-danger-hover: #A74242;
+    --color-orange: #FF6F2C;
+    --color-orange-hover: #FF5100;
+    --color-dark: #2A2A2A;
+    --color-light: #CFCFCF;
+    --color-primary: #4B8CCA;
+    --color-primary-hover: #3B6D9C;
+    --color-pruple: #645BCF;
+    --color-purple-hover: #5148B3;
+}
