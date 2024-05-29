@@ -45,7 +45,7 @@
 }
 
 /* NAVBAR */
-.navbar {
+.navbar nav {
     position: relative;
     overflow: hidden;
     display: flex;
@@ -53,12 +53,12 @@
     align-items: center;
 }
 
-.navbar>ul {
+.navbar ul {
     display: flex;
     flex-direction: row;
 }
 
-.navbar>ul>li {
+.navbar li {
     list-style: none;
     padding: 15px;
     display: flex;
@@ -66,6 +66,85 @@
     justify-content: center;
 }
 
-.navbar>ul>li>a {
+.navbar a {
     text-decoration: none;
+}
+
+/* Buttons */
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn-success {
+    background-color: var(--color-success);
+    color: var(--color-light);
+}
+
+.btn-success:hover {
+    background-color: var(--color-success-hover);
+}
+
+/* Collapse */
+
+.navbar .collapse {
+    position: absolute;
+    display: none;
+    top: -800px;
+}
+
+.navbar .collapse-visible {
+    display: none;
+    position: absolute;
+}
+
+.btn-nav {
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .navbar .collapse-section {
+        display: none;
+        position: absolute;
+    }
+
+    .navbar .collapse {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        transition: 0.5s;
+    }
+
+    .collapse li{
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .navbar .collapse-visible {
+        position: relative;
+        top: 0;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        transition: 0.2s;
+    }
+
+    .navbar .collapse-visible li {
+        padding: 15px;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .btn-nav {
+        display: flex;
+    }
 }

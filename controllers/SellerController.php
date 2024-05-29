@@ -6,6 +6,9 @@ class SellerController {
             //code...
             $connection = new SellerQuerys;
             $result = $connection->SignIn($name, $email, $password, $number, $card);
+            if($result != "ERROR") {
+                
+            }
         } catch (\Throwable $th) {
             //throw $th;
         }
