@@ -40,33 +40,41 @@
     color: var(--color-orange);
 }
 
-.text-black {
+.text-black, .text-black a {
     color: black;
 }
 
 /* NAVBAR */
-.navbar nav {
-    position: relative;
+.navbar {
     overflow: hidden;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    z-index: 100;
 }
+
+.navbar .logo {
+    padding: 15px;
+}
+
+.navbar .logo img {
+    width: 100px;
+}
+
 
 .navbar ul {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-.navbar li {
+.navbar ul li {
     list-style: none;
     padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.navbar a {
+.navbar ul li a {
     text-decoration: none;
 }
 
@@ -91,60 +99,34 @@
 
 /* Collapse */
 
-.navbar .collapse {
+.collapse {
     position: absolute;
-    display: none;
-    top: -800px;
+    top: -200px;
+    width: 100%;
+    transition: 1s;
 }
 
-.navbar .collapse-visible {
-    display: none;
-    position: absolute;
+.collapse li {
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    list-style: none;
 }
 
-.btn-nav {
-    display: none;
+.collapse li a {
+    text-decoration: none;
 }
+
 
 @media screen and (max-width: 800px) {
-    .navbar .collapse-section {
-        display: none;
-        position: absolute;
-    }
-
-    .navbar .collapse {
-        position: absolute;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        transition: 0.5s;
-    }
-
-    .collapse li{
-        width: 100%;
-        justify-content: flex-start;
-    }
-
-    .navbar .collapse-visible {
+    .collapse {
         position: relative;
         top: 0;
+        width: 100%;
+        background-color: var(--color-orange);
+        overflow: hidden;
         display: flex;
-        flex-wrap: wrap;
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        width: 100%;
-        transition: 0.2s;
-    }
-
-    .navbar .collapse-visible li {
-        padding: 15px;
-        width: 100%;
-        justify-content: flex-start;
-    }
-
-    .btn-nav {
-        display: flex;
+        transition: 1s;
     }
 }
