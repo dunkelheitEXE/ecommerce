@@ -1,6 +1,17 @@
 <?php
 require "ConnectDb.php";
 class SellerQuerys extends ConnectDb{
+    public function verifyExistence($email) {
+        try {
+            //code...
+            $sql = "SELECT * FROM seller";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute()
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
     public function SignIn($name, $email, $password, $number, $card) {
         //code
         try {
@@ -16,7 +27,7 @@ class SellerQuerys extends ConnectDb{
                 ":seller_email" => $email,
                 ":seller_password" => $password_hashed,
                 ":seller_number" => $number,
-                ":seller_card" => $card
+                ":seller_card" => $card_hashed
             );
             if($stmt->execute($array)){
                 return "OK";

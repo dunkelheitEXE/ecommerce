@@ -12,7 +12,7 @@
         </button>
     </nav>
     <ul class="collapse text-black" id="collapse">
-            <li><a href="#">Sign up</a></li>
-            <li><a href="#">Log in</a></li>
+            <li><a href="signup.php">Sign up</a></li>
+            <li><a href="login">Log in</a></li>
             <li><a href="#">Products</a></li>
     </ul>
