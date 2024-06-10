@@ -6,5 +6,6 @@ if(isset($_SESSION['user-id'])) {
 include('include/header.php');
 echo '<title>Login</title>';
 include('include/navbar.php');
+include('components/LogInCom.php');
 include('include/footer.php');
 ?>

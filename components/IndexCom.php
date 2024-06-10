@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="row j-center align-center j-center text-center">
-            <div class="col p-2">Watch for you are looking for</div>
+            <div class="col p-2">Find your favorite product here</div>
             <div class="col p-2 align-center"><a href="#"><img src="static/img/interior.jpeg" alt="" class="image img-dinamic" style="width: 300px; border-radius: 15px; border:none;"></a></div>
         </div>
         <div class="row j-center align-center j-center text-center">

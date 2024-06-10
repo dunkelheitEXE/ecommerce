@@ -8,7 +8,7 @@
             <li><a href="#">Products</a></li>
         </ul>
         <button class="btn btn-success btn-collapse" id="navBtn">
-            Hola
+            <img src="static/img/menuLogo.svg" alt="">
         </button>
     </nav>
     <ul class="collapse text-black" id="collapse">

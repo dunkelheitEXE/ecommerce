@@ -24,6 +24,7 @@ CREATE TABLE products(
 
 -- ***************ALTERS*****************
 -- ALTER TABLE seller ADD seller_password VARCHAR(500) NOT NULL AFTER seller_email; 
+-- ALTER TABLE seller ADD seller_address VARCHAR(500) NOT NULL AFTER seller_password;
 
 -- ****************SELECTS*****************
 

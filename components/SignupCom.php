@@ -10,7 +10,7 @@
                 <input type="text" name="number" class="form-control w-5" placeholder="Telephone number" required>
                 <input type="text" name="card" class="form-control w-5" placeholder="card number" required>
                 <input type="password" name="password" id="" class="form-control w-5" placeholder="password" required>
-                <input type="submit" name="submit" value="Submit" class="form-btn btn btn-success">
+                <input type="submit" name="submit" value="Submit" class="form-btn btn btn-success w-3">
             </form>
         </div>
     </div>
