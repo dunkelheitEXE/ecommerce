@@ -120,11 +120,22 @@
     border-radius: 10px;
 }
 
+.tg-success {
+    background: var(--color-success);
+    border: 2px solid var(--color-success-hover);
+    border-radius: 10px;
+}
+
 /* Bordered */
 
 .bordered-dark {
     border: 1px solid var(--color-dark);
     border-radius: 5px;
+}
+
+/* Links */
+.link-warning {
+    color: var(--color-orange);
 }
 
 /* Buttons */
@@ -164,7 +175,7 @@
     border: 1px solid var(--color-dark);
     outline: none;
     padding: 10px;
-    margin: 25px 0;
+    margin: 5px 0;
 }
 
 .focus-orange:focus, .focus-orange .form-control:focus {

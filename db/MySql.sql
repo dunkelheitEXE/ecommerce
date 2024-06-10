@@ -22,9 +22,10 @@ CREATE TABLE products(
     PRIMARY KEY(product_id)
 );
 
+-- ***************ALTERS*****************
+-- ALTER TABLE seller ADD seller_password VARCHAR(500) NOT NULL AFTER seller_email; 
+
+-- ****************SELECTS*****************
+
 SELECT * FROM seller;
 SELECT * FROM products;
-
--- ALTERS
-
-ALTER TABLE seller ADD seller_password VARCHAR(500) NOT NULL AFTER seller_email;
