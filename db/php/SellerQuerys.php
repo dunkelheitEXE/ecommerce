@@ -22,14 +22,14 @@ class SellerQuerys extends ConnectDb{
         }
     }
     
-    public function SignUp($name, $email, $password, $address, $number, $card) {
+    public function SignUp($name, $email, $password, $address, $number, $card, $photo) {
         //code
         try {
             //code...
             $password_hashed = password_hash($password, PASSWORD_BCRYPT);
             $card_hashed = password_hash($card, PASSWORD_BCRYPT);
-            $sql = "INSERT INTO seller (seller_name, seller_email, seller_password, seller_address, seller_number, seller_card) 
-            VALUES(:seller_name, :seller_email, :seller_password, :seller_address, :seller_number, :seller_card)";
+            $sql = "INSERT INTO seller (seller_name, seller_email, seller_password, seller_address, seller_number, seller_card, seller_photo) 
+            VALUES(:seller_name, :seller_email, :seller_password, :seller_address, :seller_number, :seller_card, :seller_photo)";
 
             $stmt = $this->connection->prepare($sql);
             $array = array(
@@ -38,10 +38,33 @@ class SellerQuerys extends ConnectDb{
                 ":seller_password" => $password_hashed,
                 ":seller_address" => $address,
                 ":seller_number" => $number,
-                ":seller_card" => $card_hashed
+                ":seller_card" => $card_hashed,
+                ":seller_photo" => $photo
             );
             if($stmt->execute($array)){
                 return "OK";
+            } else {
+                return "ERROR";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            echo $th;
+            return "ERROR";
+        }
+    }
+
+    public function LogIn($email, $password) {
+        try {
+            $sql = "SELECT * FROM seller WHERE seller_email = :email";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':email', $email);
+            if($stmt->execute()) {
+                $results = $stmt->fetch(PDO::FETCH_ASSOC);
+                if(count($results) > 0 && password_verify($password, $results['seller_password'])) {
+                    return $results['seller_id'];
+                } else {
+                    return "ERROR";
+                }
             } else {
                 return "ERROR";
             }

@@ -147,6 +147,9 @@
     margin: 10px;
     border-radius: 10px;
     border: none;
+    background-color: black;
+    color: var(--color-light);
+    cursor: pointer;
 }
 
 .btn-success {
@@ -156,6 +159,15 @@
 
 .btn-success:hover {
     background-color: var(--color-success-hover);
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+    color: var(--color-light);
+}
+
+.btn-danger:hover {
+    background-color: var(--color-danger-hover);
 }
 
 /* FORMS */

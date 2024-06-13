@@ -14,5 +14,5 @@
     <h2 class="form-title">Log In</h2>
     <input type="text" class="form-control" name="email" placeholder="Email">
     <input type="text" class="form-control" name="password" placeholder="Password">
-    <input type="submit" value="Log in" class="btn btn-success form-btn">
+    <input type="submit" name="submit" value="Log in" class="btn btn-success form-btn">
 </form>

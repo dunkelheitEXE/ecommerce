@@ -15,9 +15,10 @@ if(isset($_POST['submit'])) {
     $address = isset($_POST['address']) ? $_POST['address'] : '';
     $number = isset($_POST['number']) ? $_POST['number'] : '';
     $card = isset($_POST['card']) ? $_POST['card'] : '';
+    $photo = isset($_FILES['photo']['name']) ? 'static/photos/'.$_FILES['photo']['name'] : '';
 
     if($signup->verifyExistence($email) == "EMPTY") {
-        $message = $signup->SignUp($name, $email, $password, $address, $number, $card);
+        $message = $signup->SignUp($name, $email, $password, $address, $number, $card, $photo, $_FILES['photo']['tmp_name']);
         if(!empty($message)) {
             echo $message;
         }
