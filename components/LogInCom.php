@@ -10,7 +10,7 @@
     }
 </style>
 <div class="poper" id="poper"></div>
-<form action="login.php" method="post" class="form">
+<form action="login.php" method="post" class="form focus-orange">
     <h2 class="form-title">Log In</h2>
     <input type="text" class="form-control" name="email" placeholder="Email">
     <input type="text" class="form-control" name="password" placeholder="Password">

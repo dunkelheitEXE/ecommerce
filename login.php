@@ -14,10 +14,18 @@ if(isset($_POST['submit'])) {
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
     $id = $login->LogIn($email, $password);
-    if($id == "ERROR") {
-        echo "<div class='tg tg-danger'>
-            You have not could log in, something has gone wrong
-        </div>";
+    if($id == "ERROR PASS") {
+        echo '
+            <div class="tg tg-danger">
+                SOME OF YOUR CREDENTIALS ARE WRONG OR BOTH OF YOUR CREDENTIALS ARE WRONG
+            </div>
+        ';
+    } else if($id == "ERROR") {
+        echo '
+            <div class="tg tg-danger">
+                SOMETHING IN THE SERVER HAS GONE WRONG. PLEASE, TRY AGAIN OR CONTACT US IN ...
+            </div>
+        ';
     } else {
         $_SESSION['user-id'] = $id;
         header('Location: home.php');

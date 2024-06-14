@@ -60,7 +60,9 @@ class SellerController {
         try{
             $connection = new SellerQuerys;
             $results = $connection->LogIn($email, $password);
-            if($results == "ERROR") {
+            if($results == "ERROR PASS") {
+                return "ERROR PASS";
+            } else if($results == "ERROR"){
                 return "ERROR";
             } else {
                 return $results;

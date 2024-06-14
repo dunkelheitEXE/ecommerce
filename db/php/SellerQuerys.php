@@ -27,7 +27,7 @@ class SellerQuerys extends ConnectDb{
         try {
             //code...
             $password_hashed = password_hash($password, PASSWORD_BCRYPT);
-            $card_hashed = password_hash($card, PASSWORD_BCRYPT);
+            $card_hashed = ConnectDb::EncryptData($card);
             $sql = "INSERT INTO seller (seller_name, seller_email, seller_password, seller_address, seller_number, seller_card, seller_photo) 
             VALUES(:seller_name, :seller_email, :seller_password, :seller_address, :seller_number, :seller_card, :seller_photo)";
 
@@ -63,7 +63,7 @@ class SellerQuerys extends ConnectDb{
                 if(count($results) > 0 && password_verify($password, $results['seller_password'])) {
                     return $results['seller_id'];
                 } else {
-                    return "ERROR";
+                    return "ERROR PASS";
                 }
             } else {
                 return "ERROR";

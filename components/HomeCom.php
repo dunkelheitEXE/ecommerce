@@ -4,10 +4,13 @@
             <img src="static/img/interior.jpeg" alt="" style="width: 90%;">
         </div>
         <div class="col text-center">
-            <h3>Welcome to Seller's menu</h3>
+            <h3 style="margin: 10px 0;">Welcome to Seller's menu</h3>
             <p>Pendiente</p>
-            <form action="home.php" method="post" class="form">
-                <input type="text" name="Product Name" class="form-control">
+            <form action="home.php" method="post" class="form focus-orange">
+                <input type="text" name="productName" class="form-control" placeholder="Name">
+                <textarea name="productDescription" class="form-control" style="height: 100px;" placeholder="Description"></textarea>
+                <input type="number" name="productPrice" class="form-control" placeholder="Amount">
+                <input type="submit" value="Submit" class="form-btn btn btn-success">
             </form>
         </div>
     </div>
