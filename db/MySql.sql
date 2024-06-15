@@ -26,6 +26,7 @@ CREATE TABLE products(
 -- ALTER TABLE seller ADD seller_password VARCHAR(500) NOT NULL AFTER seller_email; 
 -- ALTER TABLE seller ADD seller_address VARCHAR(500) NOT NULL AFTER seller_password;
 -- ALTER TABLE seller ADD seller_photo VARCHAR(500) DEFAULT '' AFTER seller_card;
+-- ALTER TABLE products ADD product_photo VARCHAR(500) DEFAULT '' AFTER product_type;
 -- ****************DELETES**********************
 -- DELETE FROM seller WHERE seller_id = 3;
 -- ****************SELECTS*****************

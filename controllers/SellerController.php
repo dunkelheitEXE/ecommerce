@@ -71,5 +71,40 @@ class SellerController {
             return "ERROR";
         }
     }
+
+    public function submitProduct($name, $description, $price, $type, $photo, $seller, $file) {
+        $connection = new SellerQuerys;
+        try {
+            $results = $connection->submitProduct($name, $description, $price, $type, $photo, $seller);
+            if($results == "ERROR") {
+                return "ERROR";
+            } else {
+                if(!empty($file) || $file != '') {
+                    move_uploaded_file($file, $photo);
+                }
+                return "OK";
+            }
+        } catch(\Throwable $th) {
+            echo $th;
+            return "ERROR";
+        }
+    }
+
+    public function getProducts($id) {
+        $connection = new SellerQuerys;
+        try {
+            //code...
+            $results = $connection->getOwnProducts($id);
+            if($results == "ERROR") {
+                return "Something in DB has gone wrong";
+            } else {
+                return $results;
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            echo $th;
+            return "Something in DB has gone wrong";
+        }
+    }
 }
 ?>

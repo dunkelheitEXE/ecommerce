@@ -3,7 +3,7 @@
         <div class="col text-center j-center align-center"><img src="static/img/interior.jpeg" alt="" style="width: 90%; margin: 0 auto;"></div>
         <div class="col">
             <form action="signup.php" method="post" class="form focus-orange" enctype="multipart/form-data">
-                <h2 class="form-title">Sign up</h2>
+                <h2 class="form-title"><img src="static/img/personAddLogo.svg" alt=""> Sign up</h2>
                 <input type="text" name="email" class="form-control w-7" placeholder="email" required>
                 <input type="text" name="name" class="form-control w-7" placeholder="name" required>
                 <input type="text" name="address" class="form-control w-7" placeholder="address" required>

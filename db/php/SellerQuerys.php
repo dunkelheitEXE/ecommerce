@@ -74,5 +74,48 @@ class SellerQuerys extends ConnectDb{
             return "ERROR";
         }
     }
+
+    public function submitProduct($name, $description, $price, $type, $photo, $seller) {
+        try {
+            $sql = "INSERT INTO products(product_name, product_description, product_price, product_type, product_photo, seller_id) VALUES(:namee, :dess, :price, :typee, :photo, :seller)";
+            $stmt = $this->connection->prepare($sql);
+            $array = array(
+                ":namee" => $name,
+                ":dess" => $description,
+                ":price" => $price,
+                ":typee" => $type,
+                ":photo" => $photo,
+                ":seller" => $seller
+            );
+    
+            if($stmt->execute($array)) {
+                return "OK";
+            } else {
+                return "ERROR";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            echo $th;
+            return "ERROR";
+        }
+    }
+
+    public function getOwnProducts($id) {
+        try {
+            $sql = "SELECT * FROM products WHERE seller_id = :id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            if($stmt->execute()) {
+                $results = $stmt->fetchAll();
+                return $results;
+            } else {
+                return "ERROR";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            echo $th;
+            return "ERROR";
+        }
+    }
 }
 ?>
