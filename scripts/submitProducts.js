@@ -9,10 +9,17 @@ function loadContent() {
             let toShow='';
             console.log(resultsJson);
             resultsJson.forEach(element => {
+                let photo;
+                if(element['product_photo'] == '') {
+                    photo = `<a href='#' class='btn btn-table'>Add Image</a>`;
+                } else {
+                    photo = `<img src="${element['product_photo']}" alt="Non image">`;
+                }
+
                 toShow += `
                     <tr>
                         <td>
-                            <img href="${element['product_photo']}" alt="Non image">
+                            ${photo}
                         </td>
                         <td>
                             ${element['product_name']}
@@ -25,6 +32,12 @@ function loadContent() {
                         </td>
                         <td>
                             ${element['product_type']}
+                        </td>
+                        <td>
+                            <button onclick="deleteProduct(${element['product_id']})" class="btn btn-danger btn-option-table"><img src="static/img/deleteWhite.svg"></button>
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-primary btn-option-table"><img src="static/img/editWhite.svg"></a>
                         </td>
                     </tr>
                 `;
@@ -70,3 +83,25 @@ $('#formProd').submit(e => {
         }
     });
 });
+
+function deleteProduct(id) {
+    let poperBox = document.getElementById('poperBox');
+    let poper = document.createElement('div');
+    poper.id = 'poper';
+    poper.style.zIndex = 100;
+    poperBox.appendChild(poper);
+    
+    $.ajax({
+        type: 'POST',
+        url: 'deleteProduct.php',
+        data: {'id': id},
+        success: function(results) {
+            poper.innerHTML = results;
+            loadContent();
+            setTimeout(function(e){
+                poper.innerHTML = '';
+                poperBox.removeChild(poper);
+            }, 2000)
+        }
+    });
+}

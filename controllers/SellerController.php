@@ -106,5 +106,26 @@ class SellerController {
             return "Something in DB has gone wrong";
         }
     }
+
+    public function deleteProduct($id) {
+        try {
+            $connection = new SellerQuerys;
+            $results = $connection->deleteOwnProduct($id);
+            if($results == "ERROR") {
+                return "<div class='tg tg-danger'>
+                    SOMETHING HAS GONE WRONG
+                </div>";
+            } else {
+                return "<div class='tg tg-success'>
+                    OBJECT DELETE SUCCESSFULLY
+                </div>";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return "<div class='tg tg-danger'>
+                    SOMETHING HAS GONE WRONG
+                </div>";
+        }
+    }
 }
 ?>

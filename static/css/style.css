@@ -170,6 +170,15 @@
     background-color: var(--color-danger-hover);
 }
 
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
 /* FORMS */
 .form {
     width: 100%;
@@ -297,8 +306,20 @@ table img {
     width: 200px;
 }
 
+table .btn img {
+    width: 50px;
+}
+
 
 /* WIDTHS */
+.w-9 {
+    width: 90%;
+}
+
+.w-8 {
+    width: 80%;
+}
+
 .w-7 {
     width: 70%;
 }
@@ -327,7 +348,7 @@ table img {
     width: 10%;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 950px) {
     .collapse-visible {
         position: relative;
         top: 0;
@@ -353,5 +374,47 @@ table img {
 
     .row {
         flex-wrap: wrap;
+    }
+
+    table {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    table tr {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    table th {
+        display: none;
+    }
+    
+    table td {
+        display: flex;
+        width: 100%;
+        padding: 10px;
+        word-wrap: break-word;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    table td a {
+        width: 50px;
+        margin: 0 auto;
+    }
+    
+    table img {
+        width: 200px;
+    }
+    
+    table .btn img {
+        width: 50px;
+    }
+
+    table .btn-option-table {
+        width: 70%;
     }
 }

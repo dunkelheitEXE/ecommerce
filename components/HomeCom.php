@@ -1,4 +1,20 @@
+<style>
+    #poper {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .btn-table {
+        width: 200px;
+        height: 200px;
+    }
+</style>
+<div id="poperBox"></div>
 
 <div class="container" style="width: 70%;">
     <div class="row">
@@ -19,8 +35,6 @@
                     <option value="tool">Tool</option>
                     <option value="decoration">Decoration</option>
                 </select>
-                <span>Product Image</span>
-                <input type="file" name="photo" class="form-control">
                 <input type="submit" value="Submit" class="form-btn btn btn-success">
             </form>
         </div>
@@ -30,14 +44,16 @@
     </div>
 </div>
 
-<table class="text-center w-7" rules="rows">
+<table class="text-center w-9" rules="rows">
     <thead>
         <tr>
-            <th>IMAGE</th>
+            <th>Photo</th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
             <th>Type</th>
+            <th>Delete</th>
+            <th>Modify</th>
         </tr>
     </thead>
     <tbody id="tableProd">
@@ -46,4 +62,4 @@
 </table>
 
 <script src="scripts/JQuery.js"></script>
-<script src="scripts//submitProducts.js"></script>
+<script src="scripts/submitProducts.js"></script>

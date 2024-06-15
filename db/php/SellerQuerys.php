@@ -117,5 +117,22 @@ class SellerQuerys extends ConnectDb{
             return "ERROR";
         }
     }
+
+    public function deleteOwnProduct($id) {
+        try {
+            $sql = "DELETE FROM products WHERE product_id = :id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            if($stmt->execute()) {
+                return "OK";
+            } else {
+                return "ERROR";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            echo $th;
+            return "ERROR";
+        }
+    }
 }
 ?>
