@@ -1,5 +1,5 @@
 <?php
-require "ConnectDb.php";
+
 class SellerQuerys extends ConnectDb{
     public function verifyExistence($email) {
         try {
@@ -22,24 +22,23 @@ class SellerQuerys extends ConnectDb{
         }
     }
     
-    public function SignUp($name, $email, $password, $address, $number, $card, $photo) {
+    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password) {
         //code
         try {
             //code...
             $password_hashed = password_hash($password, PASSWORD_BCRYPT);
             $card_hashed = ConnectDb::EncryptData($card);
-            $sql = "INSERT INTO seller (seller_name, seller_email, seller_password, seller_address, seller_number, seller_card, seller_photo) 
-            VALUES(:seller_name, :seller_email, :seller_password, :seller_address, :seller_number, :seller_card, :seller_photo)";
-
+            $sql = "INSERT INTO seller (seller_name, seller_lastname, seller_phone, seller_email, seller_card, seller_photo, seller_password)
+            VALUES(:seller_name, :seller_lastname, :seller_phone, :seller_email, :seller_card, :seller_photo, :seller_password)";
             $stmt = $this->connection->prepare($sql);
             $array = array(
                 ":seller_name" => $name,
+                ":seller_lastname" => $lastname,
+                ":seller_phone" => $phone,
                 ":seller_email" => $email,
-                ":seller_password" => $password_hashed,
-                ":seller_address" => $address,
-                ":seller_number" => $number,
                 ":seller_card" => $card_hashed,
-                ":seller_photo" => $photo
+                ":seller_photo" => $photo,
+                ":seller_password" => $password_hashed
             );
             if($stmt->execute($array)){
                 return "OK";
@@ -77,17 +76,16 @@ class SellerQuerys extends ConnectDb{
 
     public function submitProduct($name, $description, $price, $type, $photo, $seller) {
         try {
-            $sql = "INSERT INTO products(product_name, product_description, product_price, product_type, product_photo, seller_id) VALUES(:namee, :dess, :price, :typee, :photo, :seller)";
+            $sql = "INSERT INTO product (seller_id, product_name, product_description, product_price, product_type, product_photo) VALUES(:seller_id, :product_name, :product_description, :product_price, :product_type, :product_photo)";
             $stmt = $this->connection->prepare($sql);
             $array = array(
-                ":namee" => $name,
-                ":dess" => $description,
-                ":price" => $price,
-                ":typee" => $type,
-                ":photo" => $photo,
-                ":seller" => $seller
+                ":seller_id" => $seller,
+                ":product_name" => $name,
+                ":product_description" => $description,
+                ":product_price" => $price,
+                ":product_type" => $type,
+                ":product_photo" => $photo
             );
-    
             if($stmt->execute($array)) {
                 return "OK";
             } else {
@@ -102,9 +100,9 @@ class SellerQuerys extends ConnectDb{
 
     public function getOwnProducts($id) {
         try {
-            $sql = "SELECT * FROM products WHERE seller_id = :id";
+            $sql = "SELECT * FROM product WHERE seller_id = :seller_id";
             $stmt = $this->connection->prepare($sql);
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(":seller_id", $id);
             if($stmt->execute()) {
                 $results = $stmt->fetchAll();
                 return $results;
@@ -120,7 +118,7 @@ class SellerQuerys extends ConnectDb{
 
     public function deleteOwnProduct($id) {
         try {
-            $sql = "DELETE FROM products WHERE product_id = :id";
+            $sql = "DELETE FROM product WHERE product_id = :id";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(':id', $id);
             if($stmt->execute()) {

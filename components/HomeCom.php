@@ -8,11 +8,6 @@
         justify-content: center;
         align-items: center;
     }
-
-    .btn-table {
-        width: 200px;
-        height: 200px;
-    }
 </style>
 <div id="poperBox"></div>
 
@@ -50,8 +45,8 @@
             <th>Photo</th>
             <th>Name</th>
             <th>Description</th>
-            <th>Price</th>
-            <th>Type</th>
+            <th class="colToHide">Price</th>
+            <th class="colToHide">Type</th>
             <th>Delete</th>
             <th>Modify</th>
         </tr>
@@ -63,3 +58,4 @@
 
 <script src="scripts/JQuery.js"></script>
 <script src="scripts/submitProducts.js"></script>
+<script src="scripts/script.js"></script>

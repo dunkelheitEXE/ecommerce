@@ -11,7 +11,7 @@ function loadContent() {
             resultsJson.forEach(element => {
                 let photo;
                 if(element['product_photo'] == '') {
-                    photo = `<a href='#' class='btn btn-table'>Add Image</a>`;
+                    photo = `<a href='#' class='btn-table'>Add Image</a>`;
                 } else {
                     photo = `<img src="${element['product_photo']}" alt="Non image">`;
                 }
@@ -25,12 +25,13 @@ function loadContent() {
                             ${element['product_name']}
                         </td>
                         <td>
-                            ${element['product_description']}
+                            <p class="text-table">${element['product_description']}</p>
+                            <img src="static/img/periodsImg.svg" alt="" class="hiddenTextImg htimg-non">
                         </td>
-                        <td>
+                        <td class="colToHide">
                             ${element['product_price']}
                         </td>
-                        <td>
+                        <td class="colToHide">
                             ${element['product_type']}
                         </td>
                         <td>

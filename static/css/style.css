@@ -179,6 +179,11 @@
     background-color: var(--color-primary-hover);
 }
 
+.btn-option-table {
+    width: 80px;
+    height: 80px;
+}
+
 /* FORMS */
 .form {
     width: 100%;
@@ -310,6 +315,42 @@ table .btn img {
     width: 50px;
 }
 
+.btn-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: none;
+    background-color: black;
+    color: var(--color-light);
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+}
+
+.htimg-non {
+    display: none;
+}
+
+.colToHide-nonvisible {
+    display: none;
+}
+
+.hiddenTextImg {
+    cursor: pointer;
+    background-color: var(--color-pruple);
+    border-radius: 15px;
+    width: 60px;
+    height: 30px;
+}
+
+.hiddenTextImg:hover {
+    background-color: var(--color-purple-hover);
+}
+
+.text-table-hidden {
+    display: none;
+}
 
 /* WIDTHS */
 .w-9 {
@@ -376,45 +417,19 @@ table .btn img {
         flex-wrap: wrap;
     }
 
+    /* TABLE RESPONSIVE */
+
     table {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    table tr {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    table th {
-        display: none;
-    }
-    
-    table td {
-        display: flex;
         width: 100%;
-        padding: 10px;
-        word-wrap: break-word;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
     }
 
-    table td a {
+    .btn-table {
         width: 50px;
-        margin: 0 auto;
-    }
-    
-    table img {
-        width: 200px;
-    }
-    
-    table .btn img {
-        width: 50px;
+        height: 50px;
     }
 
-    table .btn-option-table {
-        width: 70%;
+    .btn-option-table {
+        width: 30px;
+        height: 30px;
     }
 }

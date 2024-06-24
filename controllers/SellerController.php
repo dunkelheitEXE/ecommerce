@@ -30,14 +30,14 @@ class SellerController {
         }
     }
 
-    public function SignUp($name, $email, $password, $address, $number, $card, $photo, $file_photo) {
+    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $file) {
         try {
             //code...
             $connection = new SellerQuerys;
-            if(!empty($photo)) {
-                move_uploaded_file($file_photo, $photo);
+            if(!empty($photo) || $photo != '') {
+                move_uploaded_file($file, $photo);
             }
-            $result = $connection->SignUp($name, $email, $password, $address, $number, $card, $photo);
+            $result = $connection->SignUp($name, $lastname, $phone, $email, $card, $photo, $password);
             if($result != "ERROR") {
                 return "<div class='tg tg-success'>
                     User signed up successfully! Now you can <a href='login.php' class='link-warning'>Log in</a>

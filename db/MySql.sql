@@ -1,35 +1,46 @@
-CREATE DATABASE ecommerce;
+-- CREATE DATABASE ecommerce;
 USE ecommerce;
+-- DROP DATABASE ecommerce;
 
-CREATE TABLE seller(
-    seller_id INT NOT NULL AUTO_INCREMENT,
-    seller_name VARCHAR(255) NOT NULL,
-    seller_email VARCHAR(300) NOT NULL,
-    seller_number VARCHAR(12) NOT NULL,
-    seller_card VARCHAR(500),
+CREATE TABLE seller (
+    seller_id BIGINT NOT NULL AUTO_INCREMENT,
+    seller_name VARCHAR(100) NOT NULL,
+    seller_lastname VARCHAR(100) NOT NULL,
+    seller_phone VARCHAR(20) NOT NULL,
+    seller_card VARCHAR(255) NOT NULL,
+    seller_photo VARCHAR(255) DEFAULT '',
     PRIMARY KEY(seller_id)
 );
 
-CREATE TABLE products(
-    product_id INT NOT NULL AUTO_INCREMENT,
-    product_name VARCHAR(255) NOT NULL,
+CREATE TABLE product(
+    product_id BIGINT NOT NULL AUTO_INCREMENT,
+    product_name VARCHAR(100) NOT NULL,
     product_description VARCHAR(500) NOT NULL,
     product_price DOUBLE NOT NULL,
-    product_type VARCHAR(200) NOT NULL,
-    -- FOREIGN KEY HERE
-    seller_id INT NOT NULL,
-    FOREIGN KEY (seller_id) REFERENCES seller(seller_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    product_type VARCHAR(100) NOT NULL,
     PRIMARY KEY(product_id)
 );
 
+CREATE TABLE sale(
+    sale_id BIGINT NOT NULL AUTO_INCREMENT,
+    seller_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    FOREIGN KEY (seller_id) REFERENCES seller(seller_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY(sale_id, seller_id, product_id)
+);
+
 -- ***************ALTERS*****************
--- ALTER TABLE seller ADD seller_password VARCHAR(500) NOT NULL AFTER seller_email; 
--- ALTER TABLE seller ADD seller_address VARCHAR(500) NOT NULL AFTER seller_password;
--- ALTER TABLE seller ADD seller_photo VARCHAR(500) DEFAULT '' AFTER seller_card;
--- ALTER TABLE products ADD product_photo VARCHAR(500) DEFAULT '' AFTER product_type;
+-- ALTER TABLE seller ADD seller_email VARCHAR(255) NOT NULL AFTER seller_phone;
+-- ALTER TABLE seller ADD seller_password VARCHAR(255) NOT NULL;
+-- ALTER TABLE product ADD product_photo VARCHAR(255) DEFAULT NULL;
+-- ALTER TABLE product ADD seller_id BIGINT NOT NULL AFTER product_id;
+-- ALTER TABLE product ADD FOREIGN KEY (seller_id) REFERENCES seller(seller_id) ON DELETE CASCADE ON UPDATE CASCADE;
 -- ****************DELETES**********************
 -- DELETE FROM seller WHERE seller_id = 3;
+-- ***************DROPS****************************
+DROP TABLE sale;
 -- ****************SELECTS*****************
 
 SELECT * FROM seller;
-SELECT * FROM products;
+SELECT * FROM product;

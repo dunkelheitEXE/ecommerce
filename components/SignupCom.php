@@ -4,12 +4,12 @@
         <div class="col">
             <form action="signup.php" method="post" class="form focus-orange" enctype="multipart/form-data">
                 <h2 class="form-title"><img src="static/img/personAddLogo.svg" alt=""> Sign up</h2>
-                <input type="text" name="email" class="form-control w-7" placeholder="email" required>
-                <input type="text" name="name" class="form-control w-7" placeholder="name" required>
-                <input type="text" name="address" class="form-control w-7" placeholder="address" required>
-                <input type="text" name="number" class="form-control w-7" placeholder="Telephone number" required>
-                <input type="text" name="card" class="form-control w-7" placeholder="card number" required>
-                <input type="password" name="password" id="" class="form-control w-7" placeholder="password" required>
+                <input type="text" name="name" placeholder="Your Name" class="form-control" required>
+                <input type="text" name="lastname" placeholder="Your Last Name" class="form-control" required>
+                <input type="text" name="email" placeholder="Your email" class="form-control" required>
+                <input type="text" name="phone" placeholder="Your phone" class="form-control" required>
+                <input type="password" name="password" placeholder="Your password" class="form-control" required>
+                <input type="text" name="card" placeholder="Your Number Card" class="form-control" required>
                 <span style="font-size: 12px; margin-top: 15px;">Profile photo (Not required)</span>
                 <input type="file" name="photo" class="form-control w-7">
                 <input type="submit" name="submit" value="Submit" class="form-btn btn btn-success w-3">

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require "db/php/ConnectDb.php";
 if(isset($_SESSION['user-id'])) {
     header('Location: home.php');
 }
