@@ -21,15 +21,6 @@ CREATE TABLE product(
     PRIMARY KEY(product_id)
 );
 
-CREATE TABLE sale(
-    sale_id BIGINT NOT NULL AUTO_INCREMENT,
-    seller_id BIGINT NOT NULL,
-    product_id BIGINT NOT NULL,
-    FOREIGN KEY (seller_id) REFERENCES seller(seller_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    PRIMARY KEY(sale_id, seller_id, product_id)
-);
-
 -- ***************ALTERS*****************
 -- ALTER TABLE seller ADD seller_email VARCHAR(255) NOT NULL AFTER seller_phone;
 -- ALTER TABLE seller ADD seller_password VARCHAR(255) NOT NULL;

@@ -1,0 +1,1 @@
+<form action="UpdateProductImage" method="post"></form>
