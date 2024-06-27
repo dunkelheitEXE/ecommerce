@@ -132,5 +132,9 @@ class SellerQuerys extends ConnectDb{
             return "ERROR";
         }
     }
+
+    public function updateProductPhoto() {
+        $sql = "UPDATE seller SET seller_photo = :photo WHERE seller_id = :id";
+    }
 }
 ?>
