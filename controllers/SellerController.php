@@ -127,5 +127,20 @@ class SellerController {
                 </div>";
         }
     }
+
+    public function updateProductPhoto($photo, $file, $id) {
+        try {
+            $connection = new SellerQuerys;
+            $message = $connection->updateProductPhoto('static/photos/'.$photo, $file, $id);
+            if($message != "OK") {
+                return "IMAGE UPDATED SUCCESSFULLY";
+            } else {
+                return "SOMETHING HAS GONE WRONG";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return "SOMETHING HAS GONE WRONG";
+        }
+    }
 }
 ?>

@@ -133,8 +133,22 @@ class SellerQuerys extends ConnectDb{
         }
     }
 
-    public function updateProductPhoto() {
-        $sql = "UPDATE seller SET seller_photo = :photo WHERE seller_id = :id";
+    public function updateProductPhoto($photo, $file, $id) {
+        try {
+            $sql = "UPDATE seller SET seller_photo = :photo WHERE seller_id = :seller_id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':photo', $photo);
+            $stmt->bindParam(':seller_id', $id);
+            if($stmt->execute()) {
+                move_uploaded_file($file, $photo);
+                return "OK";
+            } else {
+                return "ERROR";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return "ERROR";
+        }
     }
 }
 ?>
