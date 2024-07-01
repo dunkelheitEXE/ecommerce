@@ -135,10 +135,10 @@ class SellerQuerys extends ConnectDb{
 
     public function updateProductPhoto($photo, $file, $id) {
         try {
-            $sql = "UPDATE seller SET seller_photo = :photo WHERE seller_id = :seller_id";
+            $sql = "UPDATE product SET product_photo = :photo WHERE product_id = :product_id";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(':photo', $photo);
-            $stmt->bindParam(':seller_id', $id);
+            $stmt->bindParam(':product_id', $id);
             if($stmt->execute()) {
                 move_uploaded_file($file, $photo);
                 return "OK";
@@ -148,6 +148,50 @@ class SellerQuerys extends ConnectDb{
         } catch (\Throwable $th) {
             //throw $th;
             return "ERROR";
+        }
+    }
+
+    public function updateProduct($name, $photo, $description, $price, $type, $id) {
+        try {
+            //code...
+            $sql = "UPDATE product SET product_name = :product_name, product_description = :product_description, product_price = :product_price, product_price = :product_price";
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            return null;
+        }
+    }
+
+    public function getAllProducts() {
+        try {
+            $sql = "SELECT * FROM product";
+            $stmt = $this->connection->prepare($sql);
+            if($stmt->execute()) {
+                $results = $stmt->fetchAll();
+                return $results;
+            } else {
+                return null;
+            }
+        } catch(\Throwable $th) {
+            echo $th;
+            return null;
+        }
+    }
+
+    public function getSpecific($id) {
+        try {
+            $sql = "SELECT * FROM product WHERE product_id = :product_id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':product_id', $id);
+            if($stmt->execute()) {
+                $results = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $results;
+            } else {
+                return null;
+            }
+        } catch(\Throwable $th) {
+            echo $th;
+            return null;
         }
     }
 }

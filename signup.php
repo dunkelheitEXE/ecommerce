@@ -20,7 +20,7 @@ if(isset($_POST['submit'])) {
     $file = isset($_FILES['photo']['tmp_name']) ? $_FILES['photo']['tmp_name'] : '';
 
     if($signup->verifyExistence($email) == "EMPTY") {
-        $message = $signup->SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $file);
+        $message = $signup->SignUp($name, $lastname, $phone, $email, $card, 'static/photos/'.$photo, $password, $file);
         if(!empty($message)) {
             echo $message;
         }

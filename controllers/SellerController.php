@@ -131,8 +131,8 @@ class SellerController {
     public function updateProductPhoto($photo, $file, $id) {
         try {
             $connection = new SellerQuerys;
-            $message = $connection->updateProductPhoto('static/photos/'.$photo, $file, $id);
-            if($message != "OK") {
+            $message = $connection->updateProductPhoto($photo, $file, $id);
+            if($message == "OK") {
                 return "IMAGE UPDATED SUCCESSFULLY";
             } else {
                 return "SOMETHING HAS GONE WRONG";
@@ -140,6 +140,22 @@ class SellerController {
         } catch (\Throwable $th) {
             //throw $th;
             return "SOMETHING HAS GONE WRONG";
+        }
+    }
+
+    public function getSpecific($id) {
+        try {
+            //code...
+            $connection = new SellerQuerys;
+            $results = $connection->getSpecific($id);
+            if($results != null) {
+                return $results;
+            } else {
+                return null;
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return null;
         }
     }
 }

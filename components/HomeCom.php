@@ -17,7 +17,7 @@
             <img src="static/img/interior.jpeg" alt="" style="width: 90%;">
         </div>
         <div class="col text-center">
-            <h3 style="margin: 10px 0;">Welcome to Seller's menu</h3>
+            <h3 style="margin: 10px 0;">Create your product</h3>
             <p>Pendiente</p>
             <form class="form focus-orange" id="formProd" method="post" enctype="multipart/form-data">
                 <input type="text" name="productName" class="form-control" placeholder="Name" required>
@@ -25,7 +25,7 @@
                 <input type="number" name="productPrice" class="form-control" placeholder="Amount" required>
                 <select name="type" class="form-control" required>
                     <option value="">SELECT AN OPTION</option>
-                    <option value="household_appliance">Household Appliance</option>
+                    <option value="household appliance">Household Appliance</option>
                     <option value="furniture">Furniture</option>
                     <option value="tool">Tool</option>
                     <option value="decoration">Decoration</option>

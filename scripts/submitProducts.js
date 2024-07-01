@@ -11,7 +11,7 @@ function loadContent() {
             resultsJson.forEach(element => {
                 let photo;
                 if(element['product_photo'] == '') {
-                    photo = `<a href='#' class='btn-table'>Add Image</a>`;
+                    photo = `<a href='UpdateProductImage.php?product_id=${element['product_id']}' class='btn-table'>Add Image</a>`;
                 } else {
                     photo = `<img src="${element['product_photo']}" alt="Non image">`;
                 }
@@ -38,7 +38,7 @@ function loadContent() {
                             <button onclick="deleteProduct(${element['product_id']})" class="btn btn-danger btn-option-table"><img src="static/img/deleteWhite.svg"></button>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-option-table"><img src="static/img/editWhite.svg"></a>
+                            <a href="editProduct.php?product_id=${element['product_id']}" class="btn btn-primary btn-option-table"><img src="static/img/editWhite.svg"></a>
                         </td>
                     </tr>
                 `;
