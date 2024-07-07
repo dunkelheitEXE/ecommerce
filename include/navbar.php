@@ -1,41 +1,21 @@
 </head>
-<style>
-    .collapse-visible .logout {
-        background-color: var(--color-danger);
-    }
-
-    .collapse-visible .logout a {
-        color: var(--color-light);
-    }
-
-    .collapse-visible .logout:hover {
-        background-color: var(--color-danger-hover);
-    }
-</style>
 <body>
-    <nav class="navbar bg-dark text-light">
-        <a href="index.php" class="logo"><img src="static/img/logo3.png" alt=""></a>
-        <ul class="to-hide">
-            <?php if(!isset($_SESSION['user-id'])): ?>
-                <li><a href="signup.php">Sign up</a></li>
-                <li><a href="login.php">Log in</a></li>
-            <?php endif; ?>
-            <li><a href="#">Products</a></li>
-            <?php if(isset($_SESSION['user-id'])): ?>
-                <li><a href="logout.php" class="btn btn-danger"><img src="static/img/logoutLogo.svg" alt=""></a></li>
-            <?php endif; ?>
-        </ul>
-        <button class="btn btn-collapse" id="navBtn">
-            <img src="static/img/menuLogo.svg" alt="">
-        </button>
-    </nav>
-    <ul class="collapse text-black" id="collapse">
-            <?php if(!isset($_SESSION['user-id'])): ?>
-                <li><a href="signup.php">Sign up</a></li>
-                <li><a href="login.php">Log in</a></li>
-            <?php endif; ?>
-            <li><a href="#">Products</a></li>
-            <?php if(isset($_SESSION['user-id'])): ?>
-                <li class="logout"><a href="logout.php">Log out</a></li>
-            <?php endif; ?>
-    </ul>
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="index.php">Home</a>
+        <?php if(!isset($_SESSION['user-id'])):?>
+            <a class="nav-link" href="signup.php">Sign up</a>
+            <a class="nav-link" href="login.php">Log in</a>
+        <?php else: ?>
+            <a href="logout.php" class="btn btn-danger">Log out</a>
+        <?php endif; ?>
+      </div>
+    </div>
+  </div>
+</nav>

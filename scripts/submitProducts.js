@@ -11,36 +11,31 @@ function loadContent() {
             resultsJson.forEach(element => {
                 let photo;
                 if(element['product_photo'] == '') {
-                    photo = `<a href='UpdateProductImage.php?product_id=${element['product_id']}' class='btn-table'>Add Image</a>`;
+                    photo = `<a href='UpdateProductImage.php?product_id=${element['product_id']}'>ash</a>`;
                 } else {
-                    photo = `<img src="${element['product_photo']}" alt="Non image">`;
+                    photo = ``;
                 }
 
                 toShow += `
-                    <tr>
-                        <td>
-                            ${photo}
-                        </td>
-                        <td>
-                            ${element['product_name']}
-                        </td>
-                        <td>
-                            <p class="text-table">${element['product_description']}</p>
-                            <img src="static/img/periodsImg.svg" alt="" class="hiddenTextImg htimg-non">
-                        </td>
-                        <td class="colToHide">
-                            ${element['product_price']}
-                        </td>
-                        <td class="colToHide">
-                            ${element['product_type']}
-                        </td>
-                        <td>
-                            <button onclick="deleteProduct(${element['product_id']})" class="btn btn-danger btn-option-table"><img src="static/img/deleteWhite.svg"></button>
-                        </td>
-                        <td>
-                            <a href="editProduct.php?product_id=${element['product_id']}" class="btn btn-primary btn-option-table"><img src="static/img/editWhite.svg"></a>
-                        </td>
-                    </tr>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="${photo}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">${element['product_name']}</h5>
+                                    <!-- Product price-->
+                                    $ ${element['product_price']}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                            </div>
+                        </div>
+                    </div>
                 `;
             });
             table.innerHTML = toShow;

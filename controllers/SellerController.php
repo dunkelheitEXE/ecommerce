@@ -158,5 +158,21 @@ class SellerController {
             return null;
         }
     }
+
+    public function updateProduct($name, $photo, $description, $price, $type, $id) {
+        try {
+            //code...
+            $connection = new SellerQuerys;
+            $results = $connection->updateProduct($name, $photo, $description, $price, $type, $id);
+            if($results == null) {
+                return "SOMETHING HAS GONE WRONG IN DATABASE. PLEASE, CONTACT US FOR MORE INFO";
+            } else {
+                return $results;
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return null;
+        }
+    }
 }
 ?>

@@ -1,127 +1,134 @@
-<!-- HOME Gretting -->
- <style>
-    
-
-main {
-    padding: 2rem;
-}
-
-section {
-    margin: 2rem 0;
-    padding: 2rem;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-h2 {
-    margin-top: 0;
-}
-
-p {
-    line-height: 1.6;
-}
-
-main section .blurer {
-    width: 50%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-main section .blurer img {
-    width: 100%;
-    border-radius: 10px;
-}
-main section .blurer span {
-    position: absolute;
-}
-main section .blurer:hover > img {
-    filter: blur(5px);
-    transition: 0.5s;
-}
-
-/* TEXT INSIDE OF BLURER */
-
-main section .blurer span a {
-    color: black;
-}
-
-main section .blurer span a:hover {
-    text-shadow: 0 0 10px var(--color-orange);
-    transition: 0.5s;
-}
-
-main section p {
-    text-align: center;
-    width: 70%;
-    padding: 20px;
-}
-
-@media screen and (max-width: 1100px) {
-    main section .blurer {
-        width: 80%;
-    }
-
-    main section p {
-        width: 100%;
-    }
-
-    .main-main img{
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    main section .blurer {
-    width: 100%;
-}
-}
-
- </style>
-
- <div class="main-main">
-    <div class="text-center">
-        <img src="static/img/PONCE_01.webp" alt="" class="w-2">
-    </div>
-    <div style="text-align: center; width: 50%; margin: 35px auto 0 auto;">
-        <h1 style="padding: 15px;">VIDI, VINI, VICI</h1>
-        <span><i>“El éxito es la capacidad de ir de fracaso en fracaso sin perder el entusiasmo.”</i></span><br>
-        <span>Winston Churchill</span>
-    </div>
- </div>
-    <main>
-        <hr>
-        <section id="section1">
-            <h2>Sección 1</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, voluptas possimus ex excepturi laudantium eveniet ipsum error in! Recusandae iusto quidem ullam sint, placeat odit quae eius in delectus quod?</p>
-            <div class="blurer">
-                <img src="static/img/interior.jpeg" alt="">
-                <span><a href="prdocuts.php"><b>Watch products</b></a></span>
+        <!-- Product section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+                    <div class="col-md-6">
+                        <div class="small mb-1">SKU: BST-498</div>
+                        <h1 class="display-5 fw-bolder">Shop item template</h1>
+                        <div class="fs-5 mb-5">
+                            <span class="text-decoration-line-through">$45.00</span>
+                            <span>$40.00</span>
+                        </div>
+                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                        <div class="d-flex">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <i class="bi-cart-fill me-1"></i>
+                                Add to cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        <section id="section2">
-            <h2>Sección 2</h2>
-            <p>Contenido de la Sección 2...</p>
-            <div class="blurer">
-                <img src="static/img/cajon1.webp" alt="">
-                <span><a href="prdocuts.php"><b>Watch products</b></a></span></span>
+        <!-- Related items section-->
+        <section class="py-5 bg-light">
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="fw-bolder mb-4">Related products</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Fancy Product</h5>
+                                    <!-- Product price-->
+                                    $40.00 - $80.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Special Item</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$20.00</span>
+                                    $18.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Sale Item</h5>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$50.00</span>
+                                    $25.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Popular Item</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    $40.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        <section id="section3">
-            <h2>Sección 3</h2>
-            <p>Contenido de la Sección 3...</p>
-            <div class="blurer">
-                <img src="static/img/silla1.webp" alt="">
-                <span><a href="prdocuts.php"><b>Watch products</b></a></span></span>
-            </div>
-        </section>
-        <section id="section4">
-            <h2>Sección 4</h2>
-            <p>Contenido de la Sección 4...</p>
-        </section>
-    </main>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+        </footer>

@@ -7,6 +7,6 @@ if(!isset($_SESSION['user-id'])) {
 include("include/header.php");
 echo '<title>Home</title>';
 include("include/navbar.php");
-include("components/HomeCom.php");
+include("components/Home.php");
 include("include/footer.php");
 ?>

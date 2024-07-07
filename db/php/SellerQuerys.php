@@ -154,8 +154,36 @@ class SellerQuerys extends ConnectDb{
     public function updateProduct($name, $photo, $description, $price, $type, $id) {
         try {
             //code...
-            $sql = "UPDATE product SET product_name = :product_name, product_description = :product_description, product_price = :product_price, product_price = :product_price";
-            
+            if($photo == '') {
+                $sql = "UPDATE product SET product_name = :product_name, product_description = :product_description, product_price = :product_price, product_type = :product_type";
+                $stmt = $this->connection->prepare($sql);
+                $array = array(
+                    ":product_name" => $name,
+                    ":product_description" => $description,
+                    ":product_price" => $price,
+                    ":product_type" => $type
+                );
+                if($stmt->execute($array)) {
+                    return "OK";
+                } else {
+                    return "ERROR";
+                }
+            } else {
+                $sql = "UPDATE product SET product_name = :product_name, product_description = :product_description, product_price = :product_price, product_type = :product_type, product_photo = :product_photo";
+                $stmt = $this->connection->prepare($sql);
+                $array = array(
+                    ":product_name" => $name,
+                    ":product_description" => $description,
+                    ":product_price" => $price,
+                    ":product_type" => $type,
+                    ":product_photo" => $photo
+                );
+                if($stmt->execute($array)) {
+                    return "OK";
+                } else {
+                    return "ERROR";
+                }
+            }
         } catch (\Throwable $th) {
             //throw $th;
             return null;
