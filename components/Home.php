@@ -7,6 +7,33 @@
                 </div>
             </div>
         </header>
+
+
+        <form id="formProd" class="special-form text-center">
+            <legend>Sing up your products</legend>
+            <input type="text" name="productName" placeholder="name" class="form-control my-2">
+            <textarea name="productDescription" placeholder="Description" class="form-control my-2" style="height: 150px"></textarea>
+            <input type="number" name="productPrice" placeholder="price" class="form-control my-2">
+            <select name="type" class="form-select my-2">
+                <option value="">SELECT AND OPTION</option>
+                <option value="household appliance">household appliance</option>
+                <option value="furniture">furniture</option>
+                <option value="tool">tool</option>
+                <option value="device">device</option>
+                <option value="other">other</option>
+            </select>
+            <input type="submit" value="submit" class="btn btn-success" style="width: 400px" name="submit">
+        </form>
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1>Your Products</h1>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
@@ -168,9 +195,9 @@
                                     <h5 class="fw-bolder">Special Item</h5>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill">as</div>
+                                        <div class="bi-star-fill">as</div>
+                                        <div class="bi-star-fill">as</div>
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
                                     </div>

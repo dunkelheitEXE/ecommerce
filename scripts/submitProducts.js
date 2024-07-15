@@ -11,16 +11,16 @@ function loadContent() {
             resultsJson.forEach(element => {
                 let photo;
                 if(element['product_photo'] == '') {
-                    photo = `<a href='UpdateProductImage.php?product_id=${element['product_id']}'>ash</a>`;
+                    photo = `<a href='UpdateProductImage.php?product_id=${element['product_id']}'><img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." /></a>`;
                 } else {
-                    photo = ``;
+                    photo = `<img class="card-img-top" src="${element['product_photo']}" alt="..." />`;
                 }
 
                 toShow += `
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="${photo}" alt="..." />
+                            ${photo}
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -29,10 +29,15 @@ function loadContent() {
                                     <!-- Product price-->
                                     $ ${element['product_price']}
                                 </div>
+                                <div class="text-justify text-dark small">
+                                    <!-- Product name-->
+                                    <p class="fw-bolder">${element['product_description']}</p>
+                                </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                <div class="text-center"><button class="btn btn-danger mt-4" onclick="deleteProduct(${element['product_id']})">Delete</button></div>
                             </div>
                         </div>
                     </div>
@@ -81,23 +86,14 @@ $('#formProd').submit(e => {
 });
 
 function deleteProduct(id) {
-    let poperBox = document.getElementById('poperBox');
-    let poper = document.createElement('div');
-    poper.id = 'poper';
-    poper.style.zIndex = 100;
-    poperBox.appendChild(poper);
+    alert("OBJETC DELETED SUCCESSFULLY!");
     
     $.ajax({
         type: 'POST',
         url: 'deleteProduct.php',
         data: {'id': id},
         success: function(results) {
-            poper.innerHTML = results;
             loadContent();
-            setTimeout(function(e){
-                poper.innerHTML = '';
-                poperBox.removeChild(poper);
-            }, 2000)
         }
     });
 }

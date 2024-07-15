@@ -23,3 +23,29 @@
     --color-purple-hover: #5148B3;
     --color-semi-light: #BDBDBD;
 }
+
+.special-form {
+    width: 30%;
+    margin: 25px auto;
+}
+
+.boxer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.boxer-child {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 980px) {
+    .special-form {
+        width: 90%;
+    }
+}

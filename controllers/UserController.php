@@ -1,9 +1,9 @@
 <?php
-require "db/php/SellerQuerys.php";
-class SellerController {
+require "db/php/UserQuerys.php";
+class UserController {
     public function verifyExistence($email) {
         try{
-            $connection = new SellerQuerys;
+            $connection = new UserQuerys;
             $results = $connection->verifyExistence($email);
 
             if($results == "EMPTY") {
@@ -30,14 +30,14 @@ class SellerController {
         }
     }
 
-    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $file) {
+    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType, $file) {
         try {
             //code...
-            $connection = new SellerQuerys;
+            $connection = new UserQuerys;
             if(!empty($photo) || $photo != '') {
                 move_uploaded_file($file, $photo);
             }
-            $result = $connection->SignUp($name, $lastname, $phone, $email, $card, $photo, $password);
+            $result = $connection->SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType);
             if($result != "ERROR") {
                 return "<div class='tg tg-success'>
                     User signed up successfully! Now you can <a href='login.php' class='link-warning'>Log in</a>
@@ -58,7 +58,7 @@ class SellerController {
 
     public function LogIn($email, $password) {
         try{
-            $connection = new SellerQuerys;
+            $connection = new UserQuerys;
             $results = $connection->LogIn($email, $password);
             if($results == "ERROR PASS") {
                 return "ERROR PASS";
@@ -72,10 +72,10 @@ class SellerController {
         }
     }
 
-    public function submitProduct($name, $description, $price, $type, $photo, $seller, $file) {
-        $connection = new SellerQuerys;
+    public function submitProduct($name, $description, $price, $type, $photo, $user, $file) {
+        $connection = new UserQuerys;
         try {
-            $results = $connection->submitProduct($name, $description, $price, $type, $photo, $seller);
+            $results = $connection->submitProduct($name, $description, $price, $type, $photo, $user);
             if($results == "ERROR") {
                 return "ERROR";
             } else {
@@ -91,7 +91,7 @@ class SellerController {
     }
 
     public function getProducts($id) {
-        $connection = new SellerQuerys;
+        $connection = new UserQuerys;
         try {
             //code...
             $results = $connection->getOwnProducts($id);
@@ -109,7 +109,7 @@ class SellerController {
 
     public function deleteProduct($id) {
         try {
-            $connection = new SellerQuerys;
+            $connection = new UserQuerys;
             $results = $connection->deleteOwnProduct($id);
             if($results == "ERROR") {
                 return "<div class='tg tg-danger'>
@@ -130,7 +130,7 @@ class SellerController {
 
     public function updateProductPhoto($photo, $file, $id) {
         try {
-            $connection = new SellerQuerys;
+            $connection = new UserQuerys;
             $message = $connection->updateProductPhoto($photo, $file, $id);
             if($message == "OK") {
                 return "IMAGE UPDATED SUCCESSFULLY";
@@ -146,7 +146,7 @@ class SellerController {
     public function getSpecific($id) {
         try {
             //code...
-            $connection = new SellerQuerys;
+            $connection = new UserQuerys;
             $results = $connection->getSpecific($id);
             if($results != null) {
                 return $results;
@@ -162,7 +162,7 @@ class SellerController {
     public function updateProduct($name, $photo, $description, $price, $type, $id) {
         try {
             //code...
-            $connection = new SellerQuerys;
+            $connection = new UserQuerys;
             $results = $connection->updateProduct($name, $photo, $description, $price, $type, $id);
             if($results == null) {
                 return "SOMETHING HAS GONE WRONG IN DATABASE. PLEASE, CONTACT US FOR MORE INFO";

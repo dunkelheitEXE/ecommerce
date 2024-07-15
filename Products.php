@@ -4,16 +4,16 @@ require "db/php/ConnectDb.php";
 if(!isset($_SESSION['user-id'])) {
     header('Location: index.php');
 }
-require "controllers/SellerController.php";
-$connection = new SellerController;
+require "controllers/UserController.php";
+$connection = new UserController;
 $name = $_POST['name'];
 $description = $_POST['description'];
 $price = $_POST['price'];
 $type = $_POST['type'];
 $photo = '';
-$seller = $_SESSION['user-id'];
+$User = $_SESSION['user-id'];
 
-$submit = $connection->submitProduct($name, $description, $price, $type, $photo, $seller, '');
+$submit = $connection->submitProduct($name, $description, $price, $type, $photo, $User, '');
 echo $submit;
 exit;
 ?>

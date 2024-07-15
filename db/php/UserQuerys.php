@@ -1,10 +1,10 @@
 <?php
 
-class SellerQuerys extends ConnectDb{
+class UserQuerys extends ConnectDb{
     public function verifyExistence($email) {
         try {
             //code...
-            $sql = "SELECT * FROM seller WHERE seller_email = :email";
+            $sql = "SELECT * FROM user WHERE user_email = :email";
             $stmt = $this->connection->prepare($sql);
             if($stmt->execute([":email" => $email])) {
                 $results = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -22,23 +22,24 @@ class SellerQuerys extends ConnectDb{
         }
     }
     
-    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password) {
+    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType) {
         //code
         try {
             //code...
             $password_hashed = password_hash($password, PASSWORD_BCRYPT);
             $card_hashed = ConnectDb::EncryptData($card);
-            $sql = "INSERT INTO seller (seller_name, seller_lastname, seller_phone, seller_email, seller_card, seller_photo, seller_password)
-            VALUES(:seller_name, :seller_lastname, :seller_phone, :seller_email, :seller_card, :seller_photo, :seller_password)";
+            $sql = "INSERT INTO user (user_name, user_lastname, user_phone, user_email, user_card, user_photo, user_password, user_type)
+            VALUES(:user_name, :user_lastname, :user_phone, :user_email, :user_card, :user_photo, :user_password, :user_type)";
             $stmt = $this->connection->prepare($sql);
             $array = array(
-                ":seller_name" => $name,
-                ":seller_lastname" => $lastname,
-                ":seller_phone" => $phone,
-                ":seller_email" => $email,
-                ":seller_card" => $card_hashed,
-                ":seller_photo" => $photo,
-                ":seller_password" => $password_hashed
+                ":user_name" => $name,
+                ":user_lastname" => $lastname,
+                ":user_phone" => $phone,
+                ":user_email" => $email,
+                ":user_card" => $card_hashed,
+                ":user_photo" => $photo,
+                ":user_password" => $password_hashed,
+                ":user_type" => $userType
             );
             if($stmt->execute($array)){
                 return "OK";
@@ -54,13 +55,13 @@ class SellerQuerys extends ConnectDb{
 
     public function LogIn($email, $password) {
         try {
-            $sql = "SELECT * FROM seller WHERE seller_email = :email";
+            $sql = "SELECT * FROM user WHERE user_email = :email";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(':email', $email);
             if($stmt->execute()) {
                 $results = $stmt->fetch(PDO::FETCH_ASSOC);
-                if(count($results) > 0 && password_verify($password, $results['seller_password'])) {
-                    return $results['seller_id'];
+                if(count($results) > 0 && password_verify($password, $results['user_password'])) {
+                    return $results['user_id'];
                 } else {
                     return "ERROR PASS";
                 }
@@ -74,12 +75,12 @@ class SellerQuerys extends ConnectDb{
         }
     }
 
-    public function submitProduct($name, $description, $price, $type, $photo, $seller) {
+    public function submitProduct($name, $description, $price, $type, $photo, $user) {
         try {
-            $sql = "INSERT INTO product (seller_id, product_name, product_description, product_price, product_type, product_photo) VALUES(:seller_id, :product_name, :product_description, :product_price, :product_type, :product_photo)";
+            $sql = "INSERT INTO product (user_id, product_name, product_description, product_price, product_type, product_photo) VALUES(:user_id, :product_name, :product_description, :product_price, :product_type, :product_photo)";
             $stmt = $this->connection->prepare($sql);
             $array = array(
-                ":seller_id" => $seller,
+                ":user_id" => $user,
                 ":product_name" => $name,
                 ":product_description" => $description,
                 ":product_price" => $price,
@@ -100,9 +101,9 @@ class SellerQuerys extends ConnectDb{
 
     public function getOwnProducts($id) {
         try {
-            $sql = "SELECT * FROM product WHERE seller_id = :seller_id";
+            $sql = "SELECT * FROM product WHERE user_id = :user_id";
             $stmt = $this->connection->prepare($sql);
-            $stmt->bindParam(":seller_id", $id);
+            $stmt->bindParam(":user_id", $id);
             if($stmt->execute()) {
                 $results = $stmt->fetchAll();
                 return $results;

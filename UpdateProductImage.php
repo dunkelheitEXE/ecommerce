@@ -4,8 +4,8 @@ require "db/php/ConnectDb.php";
 if(!isset($_SESSION['user-id'])) {
     header('Location: index.php');
 }
-require "controllers/SellerController.php";
-$connection = new SellerController;
+require "controllers/UserController.php";
+$connection = new UserController;
 $imgsrc = $connection->getSpecific($_GET['product_id']);
 include('include/header.php');
 echo '<title>Update Profile</title>';

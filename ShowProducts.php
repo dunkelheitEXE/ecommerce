@@ -4,8 +4,8 @@ require "db/php/ConnectDb.php";
 if(!isset($_SESSION['user-id'])) {
     header('Location: index.php');
 }
-require "controllers/SellerController.php";
-$connection = new SellerController;
+require "controllers/UserController.php";
+$connection = new UserController;
 
 $id = $_SESSION['user-id'];
 $results = $connection->getProducts($id);

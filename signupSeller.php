@@ -4,8 +4,8 @@ require "db/php/ConnectDb.php";
 if(isset($_SESSION['user-id'])) {
     header('Location: home.php');
 }
-require "controllers/SellerController.php";
-$signup = new SellerController;
+require "controllers/UserController.php";
+$signup = new UserController;
 include('include/header.php');
 echo '<title>Login</title>';
 include('include/navbar.php');
@@ -18,9 +18,10 @@ if(isset($_POST['submit'])) {
     $photo = isset($_FILES['photo']['name']) ? $_FILES['photo']['name'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $file = isset($_FILES['photo']['tmp_name']) ? $_FILES['photo']['tmp_name'] : '';
+    $userType = "seller";
 
     if($signup->verifyExistence($email) == "EMPTY") {
-        $message = $signup->SignUp($name, $lastname, $phone, $email, $card, 'static/photos/'.$photo, $password, $file);
+        $message = $signup->SignUp($name, $lastname, $phone, $email, $card, 'static/photos/'.$photo, $password, $userType, $file);
         if(!empty($message)) {
             echo $message;
         }
@@ -28,6 +29,6 @@ if(isset($_POST['submit'])) {
         echo $signup->verifyExistence($email);
     }
 }
-include('components/SignupCom.php');
+include('components/SignupSellerCom.php');
 include('include/footer.php');
 ?>
