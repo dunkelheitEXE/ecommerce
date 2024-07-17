@@ -26,7 +26,7 @@
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
                 <h2 class="fw-bolder mb-4">Related products</h2>
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="relatedProducts">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="contentLoaded">
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
@@ -53,3 +53,6 @@
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
         </footer>
+
+        <script src="scripts/JQuery.js"></script>
+        <script src="scripts/ProductQuery.js"></script>
