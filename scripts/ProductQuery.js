@@ -43,6 +43,10 @@ function SelectAll() {
     });
 }
 
+function SelectOne() {
+    let num
+}
+
 $(document).ready(e => {
     SelectAll();
 });

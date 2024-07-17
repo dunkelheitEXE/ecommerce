@@ -17,5 +17,23 @@ class ProductQuery extends ConnectDb{
             return "ERROR DB";
         }
     }
+
+    public function SelectOne($id) {
+        try {
+            //code...
+            $query = "SELECT * FROM product WHERE product_id = :product_id";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bindParam(':user_id', $id);
+            if($stmt->execute()) {
+                $results = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $results;
+            } else {
+                return "ERROR";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return "ERROR DB";
+        }
+    }
 }
 ?>
