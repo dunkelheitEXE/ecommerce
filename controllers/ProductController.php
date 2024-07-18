@@ -18,11 +18,11 @@ class ProductController {
         }
     }
 
-    public function SelectOne($id) {
+    public function SelectOne() {
         try {
             //code...
             $connection = new ProductQuery;
-            $results = $connection->SelectOne($id);
+            $results = $connection->SelectOne();
             $resultsJson = json_encode($results);
             echo $resultsJson;
         } catch (\Throwable $th) {

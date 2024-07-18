@@ -11,7 +11,7 @@ function SelectAll() {
             resultsJson.forEach(e => {
                 let photo;
                 if(e['product_photo'] == '') {
-                    photo = `<a href='UpdateProductImage.php?product_id=${e['product_id']}'><img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." /></a>`;
+                    photo = `<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />`;
                 } else {
                     photo = `<img class="card-img-top" src="${e['product_photo']}" alt="..." />`;
                 }
@@ -27,7 +27,10 @@ function SelectAll() {
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">${e['product_name']}</h5>
                                     <!-- Product price-->
-                                    ${e['product_price']}
+                                    $ ${e['product_price']}
+                                </div>
+                                <div class="text-justify text-dark small">
+                                    <p class="fw-bolder">${e['product_description']}</p>
                                 </div>
                             </div>
                             <!-- Product actions-->
@@ -44,9 +47,33 @@ function SelectAll() {
 }
 
 function SelectOne() {
-    let num
+    let name = document.getElementById('elementName');
+    let price = document.getElementById('elementPrice');
+    let description = document.getElementById('elementDescription');
+    let photo = document.getElementById('elementPhoto');
+    $.ajax({
+        method: 'GET',
+        url: 'SelectOne.php',
+        data: {},
+        success: function(results) {
+            let resultsJson = JSON.parse(results);
+            name.innerHTML = resultsJson['product_name'];
+            price.innerHTML = '$' + resultsJson['product_price'];
+            description.innerHTML = resultsJson['product_description'];
+            if(resultsJson['product_photo'] == '') {
+                photo.innerHTML = `<img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." />`
+            } else {
+                photo.innerHTML = `<img class="card-img-top mb-5 mb-md-0" src="${resultsJson['product_photo']}" alt="..." />`
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            // Acciones a realizar en caso de error
+            alert(errorThrown);
+        }
+    });
 }
 
 $(document).ready(e => {
+    SelectOne();
     SelectAll();
 });
