@@ -14,21 +14,25 @@ if(isset($_POST['submit'])) {
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-    $id = $login->LogIn($email, $password);
-    if($id == "ERROR PASS") {
+    $results = $login->LogIn($email, $password);
+    if($results == "ERROR PASS") {
         echo '
             <div class="tg tg-danger">
                 SOME OF YOUR CREDENTIALS ARE WRONG OR BOTH OF YOUR CREDENTIALS ARE WRONG
             </div>
         ';
-    } else if($id == "ERROR") {
+    } else if($results == "ERROR") {
         echo '
             <div class="tg tg-danger">
                 SOMETHING IN THE SERVER HAS GONE WRONG. PLEASE, TRY AGAIN OR CONTACT US IN ...
             </div>
         ';
     } else {
+        $id = $results['user_id'];
+        $user_type = $results['user_type'];
+        
         $_SESSION['user-id'] = $id;
+        $_SESSION['user-type'] = $user_type;
         header('Location: home.php');
     }
 }
