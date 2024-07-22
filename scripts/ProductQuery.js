@@ -8,10 +8,11 @@ function SelectAll() {
         success: function (results) {
             console.log(results);
             let resultsJson = JSON.parse(results);
+            let counter = 0;
             resultsJson.forEach(e => {
                 let photo;
                 if(e['product_photo'] == '') {
-                    photo = `<a href='UpdateProductImage.php?product_id=${e['product_id']}'><img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." /></a>`;
+                    photo = `<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />`;
                 } else {
                     photo = `<img class="card-img-top" src="${e['product_photo']}" alt="..." />`;
                 }
@@ -37,6 +38,11 @@ function SelectAll() {
                         </div>
                     </div>
                 `;
+
+                counter++;
+                if(counter >= 8) {
+                    return 0;
+                }
             });
             content.innerHTML = box;
         }

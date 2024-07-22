@@ -41,6 +41,11 @@ CREATE TABLE product(
 -- ***************DROPS****************************
 -- DROP TABLE sale;
 -- ****************SELECTS*****************
-
+-- Distinct
+-- Count(): EXMAPLE: SELECT COUNT (DISCTINCT product_price) AS precios_diferentes FROM product;
+-- ORDER BY: SELECT * FROM product ORDER BY product_price;
+-- ORDER BY DESC: SELECT * FROM product ORDER BY product_price DESC;
+-- SELECT product_price, COUNT(*) FROM product GROUP BY product_price HAVING product_price>=19.0 ORDER BY product_price DESC;
+SELECT * FROM product LIMIT 4;
 SELECT * FROM user;
 SELECT * FROM product;
