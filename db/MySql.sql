@@ -42,10 +42,22 @@ CREATE TABLE product(
 -- DROP TABLE sale;
 -- ****************SELECTS*****************
 -- Distinct
--- Count(): EXMAPLE: SELECT COUNT (DISCTINCT product_price) AS precios_diferentes FROM product;
--- ORDER BY: SELECT * FROM product ORDER BY product_price;
--- ORDER BY DESC: SELECT * FROM product ORDER BY product_price DESC;
+-- SELECT COUNT (DISCTINCT product_price) AS precios_diferentes FROM product;
+-- SELECT * FROM product ORDER BY product_price;
+-- SELECT * FROM product ORDER BY product_price DESC;
 -- SELECT product_price, COUNT(*) FROM product GROUP BY product_price HAVING product_price>=19.0 ORDER BY product_price DESC;
-SELECT * FROM product LIMIT 4;
+-- SELECT * FROM product LIMIT 4;
+-- SELECT * FROM product WHERE product_price >= 9 LIMIT 3;
+-- SELECT * FROM product FROM product LIMIT 2,3;
+-- SELECT product_name, product_price FROM product WHERE product_price IN (19);
+-- SELECT product_name, product_price FROM product WHERE product_name IN ("florero", "lap");
+-- SELECT product_name, product_price FROM product WHERE product_price IN (15, 15);
+-- SELECT product_name, product_price FROM product WHERE product_price NOT IN(19.5, 15.5);
+-- SELECT product_name, product_price FROM product WHERE product_name NOT IN("LAP", "FLORERO") ORDER BY product_price DESC;
+-- SELECT product_name, product_price FROM product WHERE prodct_price BETWEEN 15.5 AND 19 ORDER BY product_name;
+-- SELECT product_name, product_price FROM product WHERE prodct_price NOT BETWEEN 15.5 AND 19 ORDER BY product_name;
+SELECT product_name, product_price FROM product WHERE prodct_price BETWEEN "florero" AND "lap" ORDER BY product_name;
+SELECT product_name, product_price FROM product WHERE prodct_price NOT BETWEEN "florero" AND "lap" ORDER BY product_name;
+
 SELECT * FROM user;
 SELECT * FROM product;

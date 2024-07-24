@@ -18,6 +18,23 @@ class ProductController {
         }
     }
 
+    public function relatedProducts() {
+        $connection = new ProductQuery;
+        try {
+            //code...
+            $results = $connection->relatedProducts();
+            if($results != "ERROR") {
+                $resultsJson = json_encode($results);
+                echo $resultsJson;
+            } else {
+                echo "ERROR. SOMETHING HAS GONE WRONG";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            echo "ERROR. SOMETHING HAS GONE WRONG";
+        }
+    }
+
     public function SelectOne() {
         try {
             //code...

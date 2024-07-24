@@ -19,8 +19,8 @@
               Dropdown link
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="signupSeller.php">As customer</a></li>
-              <li><a class="dropdown-item" href="#">I want to sell</a></li>
+              <li><a class="dropdown-item" href="signupSeller.php">I want to sell</a></li>
+              <li><a class="dropdown-item" href="#">As customer</a></li>
             </ul>
           </li>
           <li class="nav-item">

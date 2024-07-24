@@ -3,7 +3,7 @@ function SelectAll() {
     let box="";
     $.ajax({
         method: 'GET',
-        url: 'SelectAll.php',
+        url: 'RelatedProducts.php',
         data: {},
         success: function (results) {
             console.log(results);
@@ -41,11 +41,6 @@ function SelectAll() {
                         </div>
                     </div>
                 `;
-
-                counter++;
-                if(counter >= 8) {
-                    return 0;
-                }
             });
             content.innerHTML = box;
         }

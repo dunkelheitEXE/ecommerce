@@ -18,6 +18,24 @@ class ProductQuery extends ConnectDb{
         }
     }
 
+    public function relatedProducts() {
+        try {
+            //code...
+            $query = "SELECT * FROM product LIMIT 8";
+            $stmt = $this->connection->prepare($query);
+            $array = array();
+            if($stmt->execute()) {
+                $array = $stmt->fetchAll();
+                return $array;
+            } else {
+                return "ERROR";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return "ERROR DB";
+        }
+    }
+
     public function SelectOne() {
         try {
             //code...
