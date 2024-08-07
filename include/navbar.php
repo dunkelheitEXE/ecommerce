@@ -26,6 +26,10 @@
           <li class="nav-item">
             <a class="nav-link" href="login.php">Log in</a>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Merch</a>
+          </li>
+      </ul>
       </div>
       <?php else: ?>
         <li class="nav-item">

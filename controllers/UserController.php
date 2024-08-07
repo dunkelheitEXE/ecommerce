@@ -10,12 +10,12 @@ class UserController {
                 return "EMPTY";
 
             } else if ($results == "FILL"){
-                return "<div class='tg tg-danger'>
+                return "<div class='alert alert-danger m-5'>
                     THIS USER ALREADY EXISTS!
                 </div>";
 
             } else {
-                return "<div class='tg tg-danger'>
+                return "<div class='alert alert-danger m-5'>
                     ERROR IN FUNCTION 'verifyExistence()'
                 </div>";
 
@@ -23,7 +23,7 @@ class UserController {
             
         } catch(\Throwable $th) {
             echo $th;
-            echo "<div class='tg tg-danger'>
+            echo "<div class='alert alert-danger m-5'>
                 ERROR IN FUNCTION 'verifyExistence()'
             </div>";
             return "ERROR";
@@ -39,11 +39,11 @@ class UserController {
             }
             $result = $connection->SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType);
             if($result != "ERROR") {
-                return "<div class='tg tg-success'>
+                return "<div class='alert alert-success'>
                     User signed up successfully! Now you can <a href='login.php' class='link-warning'>Log in</a>
                 </div>";
             } else {
-                return "<div class='tg tg-danger'>
+                return "<div class='alert alert-danger'>
                     Something has gone wrong!
                 </div>";
             }
@@ -133,13 +133,19 @@ class UserController {
             $connection = new UserQuerys;
             $message = $connection->updateProductPhoto($photo, $file, $id);
             if($message == "OK") {
-                return "IMAGE UPDATED SUCCESSFULLY";
+                return "<div class='alert alert-success m-5'>
+                    IMAGE UPDATED SUCCESSFULLY
+                </div>";
             } else {
-                return "SOMETHING HAS GONE WRONG";
+                return "<div class='alert alert-danger m-5'>
+                    SOMETHING HAS GONE WRONG
+                </div>";
             }
         } catch (\Throwable $th) {
             //throw $th;
-            return "SOMETHING HAS GONE WRONG";
+            return "<div class='alert alert-danger m-5'>
+                SOMETHING HAS GONE WRONG
+            </div>";
         }
     }
 

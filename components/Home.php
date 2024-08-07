@@ -10,7 +10,7 @@
 
 
         <form id="formProd" class="special-form text-center">
-            <legend>Sing up your products</legend>
+            <legend>Sign up your products</legend>
             <input type="text" name="productName" placeholder="name" class="form-control my-2">
             <textarea name="productDescription" placeholder="Description" class="form-control my-2" style="height: 150px"></textarea>
             <input type="number" name="productPrice" placeholder="price" class="form-control my-2">

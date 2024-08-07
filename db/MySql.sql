@@ -30,6 +30,14 @@ CREATE TABLE product(
     PRIMARY KEY(product_id)
 );
 
+CREATE TABLE product_images(
+    product_id BIGINT NOT NULL,
+    image_url VARCHAR(255) DEFAULT NULL,
+    FOREIGN KEY(product_id) REFERENCES product (product_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
 -- ***************ALTERS*****************
 -- ALTER TABLE user ADD user_email VARCHAR(255) NOT NULL AFTER user_phone;
 -- ALTER TABLE user ADD user_password VARCHAR(255) NOT NULL;
@@ -56,8 +64,8 @@ CREATE TABLE product(
 -- SELECT product_name, product_price FROM product WHERE product_name NOT IN("LAP", "FLORERO") ORDER BY product_price DESC;
 -- SELECT product_name, product_price FROM product WHERE prodct_price BETWEEN 15.5 AND 19 ORDER BY product_name;
 -- SELECT product_name, product_price FROM product WHERE prodct_price NOT BETWEEN 15.5 AND 19 ORDER BY product_name;
-SELECT product_name, product_price FROM product WHERE prodct_price BETWEEN "florero" AND "lap" ORDER BY product_name;
-SELECT product_name, product_price FROM product WHERE prodct_price NOT BETWEEN "florero" AND "lap" ORDER BY product_name;
+-- SELECT product_name, product_price FROM product WHERE prodct_price BETWEEN "florero" AND "lap" ORDER BY product_name;
+-- SELECT product_name, product_price FROM product WHERE prodct_price NOT BETWEEN "florero" AND "lap" ORDER BY product_name;
 
 SELECT * FROM user;
 SELECT * FROM product;

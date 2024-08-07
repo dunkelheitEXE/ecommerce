@@ -70,7 +70,7 @@ class UserQuerys extends ConnectDb{
             }
         } catch (\Throwable $th) {
             //throw $th;
-            echo $th;
+            //echo $th;
             return "ERROR";
         }
     }

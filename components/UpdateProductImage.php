@@ -7,7 +7,9 @@
         <?php endif; ?>
     </div>
     <br>
-    <span>PROFILE PHOTO:</span>
-    <input type="file" name="photo" class="form-control">
-    <input type="submit" value="submit" name="submit" class="btn form-btn btn-success">
+    <div class="m-5 text-center">
+        <span class=" mb-3">PROFILE PHOTO:</span>
+        <input type="file" name="photo" class="form-control mb-3">
+        <input type="submit" value="submit" name="submit" class="btn form-btn btn-success mb-3" style="width: 70%;">
+    </div>
 </form>

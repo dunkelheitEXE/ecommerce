@@ -17,14 +17,14 @@ if(isset($_POST['submit'])) {
     $results = $login->LogIn($email, $password);
     if($results == "ERROR PASS") {
         echo '
-            <div class="tg tg-danger">
-                SOME OF YOUR CREDENTIALS ARE WRONG OR BOTH OF YOUR CREDENTIALS ARE WRONG
+            <div class="alert alert-danger m-5">
+                SOME OF YOUR CREDENTIALS ARE WRONG
             </div>
         ';
     } else if($results == "ERROR") {
         echo '
-            <div class="tg tg-danger">
-                SOMETHING IN THE SERVER HAS GONE WRONG. PLEASE, TRY AGAIN OR CONTACT US IN ...
+            <div class="alert alert-danger m-5">
+                SOME OF YOUR CREDENTIALS ARE WRONG
             </div>
         ';
     } else {
