@@ -22,14 +22,14 @@ class UserQuerys extends ConnectDb{
         }
     }
     
-    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType) {
+    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType, $country) {
         //code
         try {
             //code...
             $password_hashed = password_hash($password, PASSWORD_BCRYPT);
             $card_hashed = ConnectDb::EncryptData($card);
-            $sql = "INSERT INTO user (user_name, user_lastname, user_phone, user_email, user_card, user_photo, user_password, user_type)
-            VALUES(:user_name, :user_lastname, :user_phone, :user_email, :user_card, :user_photo, :user_password, :user_type)";
+            $sql = "INSERT INTO user (user_name, user_lastname, user_phone, user_email, user_card, user_photo, user_password, user_type, user_country)
+            VALUES(:user_name, :user_lastname, :user_phone, :user_email, :user_card, :user_photo, :user_password, :user_type, :user_country)";
             $stmt = $this->connection->prepare($sql);
             $array = array(
                 ":user_name" => $name,
@@ -39,7 +39,8 @@ class UserQuerys extends ConnectDb{
                 ":user_card" => $card_hashed,
                 ":user_photo" => $photo,
                 ":user_password" => $password_hashed,
-                ":user_type" => $userType
+                ":user_type" => $userType,
+                ":user_country" => $country
             );
             if($stmt->execute($array)){
                 return "OK";
