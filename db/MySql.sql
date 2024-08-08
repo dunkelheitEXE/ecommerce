@@ -45,7 +45,13 @@ CREATE TABLE countries (
     PRIMARY KEY(country_name)
 );
 
+-- HOME WORK
 SELECT user_name FROM user WHERE user_id IN (SELECT user_id FROM product WHERE product_type = "device");
+SELECT user.user_id FROM user;
+DROP VIEW usuarios_productos;
+CREATE VIEW usuarios_productos AS SELECT user_id AS id, CONCAT(user_name, ' ', user_lastname) AS complete_name,
+(SELECT COUNT(product_name) FROM product WHERE user_id = id) AS productos_vendiendo FROM user;
+SELECT * FROM usuarios_productos;
 
 -- ***************ALTERS*****************
 -- ALTER TABLE user ADD user_email VARCHAR(255) NOT NULL AFTER user_phone;
