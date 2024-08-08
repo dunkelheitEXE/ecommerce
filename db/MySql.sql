@@ -36,7 +36,7 @@ CREATE TABLE product_images(
     FOREIGN KEY(product_id) REFERENCES product (product_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
+SELECT user_name FROM user WHERE user_id IN (SELECT user_id FROM product WHERE product_type = "device");
 
 -- ***************ALTERS*****************
 -- ALTER TABLE user ADD user_email VARCHAR(255) NOT NULL AFTER user_phone;
