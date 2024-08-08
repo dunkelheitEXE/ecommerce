@@ -30,14 +30,14 @@ class UserController {
         }
     }
 
-    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType, $file) {
+    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType, $file, $country) {
         try {
             //code...
             $connection = new UserQuerys;
             if(!empty($photo) || $photo != '') {
                 move_uploaded_file($file, $photo);
             }
-            $result = $connection->SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType);
+            $result = $connection->SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType, $country);
             if($result != "ERROR") {
                 return "<div class='alert alert-success'>
                     User signed up successfully! Now you can <a href='login.php' class='link-warning'>Log in</a>
