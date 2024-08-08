@@ -8,7 +8,7 @@
             </div>
         </header>
 
-
+        <?php if($_SESSION['user-type'] == "seller"):?>
         <form id="formProd" class="special-form text-center">
             <legend>Sign up your products</legend>
             <input type="text" name="productName" placeholder="name" class="form-control my-2">
@@ -32,6 +32,7 @@
                 </div>
             </div>
         </div>
+        <?php endif;?>
 
 
         <!-- Section-->

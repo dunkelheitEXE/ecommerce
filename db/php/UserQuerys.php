@@ -64,15 +64,13 @@ class UserQuerys extends ConnectDb{
                 if(count($results) > 0 && password_verify($password, $results['user_password'])) {
                     return $results;
                 } else {
-                    return "ERROR PASS";
+                    return array();
                 }
             } else {
-                return "ERROR";
+                return array();
             }
         } catch (\Throwable $th) {
-            //throw $th;
-            //echo $th;
-            return "ERROR";
+            return array();
         }
     }
 

@@ -60,12 +60,18 @@ class UserController {
         try{
             $connection = new UserQuerys;
             $results = $connection->LogIn($email, $password);
-            if($results == "ERROR PASS") {
-                return "ERROR PASS";
-            } else if($results == "ERROR"){
-                return "ERROR";
+            if(!empty($results)) {
+                $userId = $results['user_id'];
+                $usertype = $results['user_type'];
+                $_SESSION['user-id'] = $userId;
+                $_SESSION['user-type'] = $usertype;
+                header('Location: home.php');
             } else {
-                return $results;
+                echo '
+                    <div class="alert alert-danger">
+                        YOUR CREDENTIALS ARE WRONG. PLEASE, TRY AGAIN
+                    </div>
+                ';
             }
         }catch(\Throwable $th) {
             return "ERROR";

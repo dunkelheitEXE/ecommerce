@@ -12,7 +12,7 @@
                 <div class="col-md-12  text-center">
                     <form action="login.php" method="post" class="form special-form">
                         <input type="text" class="form-control my-2" name="email" placeholder="Email">
-                        <input type="text" class="form-control my-2" name="password" placeholder="Password">
+                        <input type="password" class="form-control my-2" name="password" placeholder="Password">
                         <input type="submit" name="submit" value="Log in" class="btn btn-success" style="width: 40%">
                     </form>
                 </div>

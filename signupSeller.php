@@ -5,6 +5,7 @@ if(isset($_SESSION['user-id'])) {
     header('Location: home.php');
 }
 require "controllers/UserController.php";
+require "controllers/FormController.php";
 $signup = new UserController;
 include('include/header.php');
 echo '<title>Login</title>';
