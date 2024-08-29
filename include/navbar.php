@@ -27,15 +27,18 @@
             <a class="nav-link" href="login.php">Log in</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Merch</a>
+            <a class="nav-link" href="loginCustomer.php">Log in Customer</a>
           </li>
+          <?php endif;?>
+          <li class="nav-item">
+            <a href="ProductPage.php" class="nav-link">Products</a>
+          </li>
+          <?php if(isset($_SESSION['user-id'])):?>
+          <li class="nav-item">
+            <a href="logout.php" class="btn btn-danger">Log out</a>
+          </li>
+          <?php endif; ?>
       </ul>
-      </div>
-      <?php else: ?>
-        <li class="nav-item">
-          <a href="logout.php" class="btn btn-danger">Log out</a>
-        </li>
-      <?php endif; ?>
-      </ul>
+    </div>
   </div>
 </nav>

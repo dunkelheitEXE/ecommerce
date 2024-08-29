@@ -1,9 +1,9 @@
 <?php
-require "db/php/UserQuerys.php";
-class UserController {
+require "db/php/SellerQueries.php";
+class SellerController {
     public function verifyExistence($email) {
         try{
-            $connection = new UserQuerys;
+            $connection = new SellerQueries;
             $results = $connection->verifyExistence($email);
 
             if($results == "EMPTY") {
@@ -30,45 +30,43 @@ class UserController {
         }
     }
 
-    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType, $file, $country) {
+    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $file, $country) {
         try {
             //code...
-            $connection = new UserQuerys;
+            $connection = new SellerQueries;
             if(!empty($photo) || $photo != '') {
                 move_uploaded_file($file, $photo);
             }
-            $result = $connection->SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType, $country);
-            if($result != "ERROR") {
-                return "<div class='alert alert-success'>
-                    User signed up successfully! Now you can <a href='login.php' class='link-warning'>Log in</a>
+            $result = $connection->SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $country);
+            if($result == "OK") {
+                return "<div class='alert alert-success m-5'>
+                    User signed up successfully! Now you can <a href='login.php' class='alert-link'>Log in</a>
                 </div>";
             } else {
-                return "<div class='alert alert-danger'>
-                    Something has gone wrong!
+                return "<div class='alert alert-danger m-5'>
+                    ". $result ."
                 </div>";
             }
         } catch (\Throwable $th) {
             //throw $th;
-            echo $th;
-            return "<div class='tg tg-danger'>
-                Something has gone wrong!
+            return "<div class='tg tg-danger m-5'>
+                ". $th ."
             </div>";
         }
     }
 
     public function LogIn($email, $password) {
         try{
-            $connection = new UserQuerys;
+            $connection = new SellerQueries;
             $results = $connection->LogIn($email, $password);
             if(!empty($results)) {
-                $userId = $results['user_id'];
-                $usertype = $results['user_type'];
-                $_SESSION['user-id'] = $userId;
-                $_SESSION['user-type'] = $usertype;
+                $sellerId = $results['seller_id'];
+                $_SESSION['user-id'] = $sellerId;
+                $_SESSION['user-type'] = "seller";
                 header('Location: home.php');
             } else {
                 echo '
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger m-5">
                         YOUR CREDENTIALS ARE WRONG. PLEASE, TRY AGAIN
                     </div>
                 ';
@@ -78,10 +76,10 @@ class UserController {
         }
     }
 
-    public function submitProduct($name, $description, $price, $type, $photo, $user, $file) {
-        $connection = new UserQuerys;
+    public function submitProduct($name, $description, $price, $type, $photo, $seller, $file) {
+        $connection = new SellerQueries;
         try {
-            $results = $connection->submitProduct($name, $description, $price, $type, $photo, $user);
+            $results = $connection->submitProduct($name, $description, $price, $type, $photo, $seller);
             if($results == "ERROR") {
                 return "ERROR";
             } else {
@@ -97,7 +95,7 @@ class UserController {
     }
 
     public function getProducts($id) {
-        $connection = new UserQuerys;
+        $connection = new SellerQueries;
         try {
             //code...
             $results = $connection->getOwnProducts($id);
@@ -115,7 +113,7 @@ class UserController {
 
     public function deleteProduct($id) {
         try {
-            $connection = new UserQuerys;
+            $connection = new SellerQueries;
             $results = $connection->deleteOwnProduct($id);
             if($results == "ERROR") {
                 return "<div class='tg tg-danger'>
@@ -136,7 +134,7 @@ class UserController {
 
     public function updateProductPhoto($photo, $file, $id) {
         try {
-            $connection = new UserQuerys;
+            $connection = new SellerQueries;
             $message = $connection->updateProductPhoto($photo, $file, $id);
             if($message == "OK") {
                 return "<div class='alert alert-success m-5'>
@@ -158,7 +156,7 @@ class UserController {
     public function getSpecific($id) {
         try {
             //code...
-            $connection = new UserQuerys;
+            $connection = new SellerQueries;
             $results = $connection->getSpecific($id);
             if($results != null) {
                 return $results;
@@ -171,19 +169,49 @@ class UserController {
         }
     }
 
-    public function updateProduct($name, $photo, $description, $price, $type, $id) {
+    public function updateProduct($name, $description, $price, $type, $id) {
         try {
             //code...
-            $connection = new UserQuerys;
-            $results = $connection->updateProduct($name, $photo, $description, $price, $type, $id);
-            if($results == null) {
-                return "SOMETHING HAS GONE WRONG IN DATABASE. PLEASE, CONTACT US FOR MORE INFO";
+            $connection = new SellerQueries;
+            $results = $connection->updateProduct($name, $description, $price, $type, $id);
+            if($results == "OK") {
+                header('Location: home.php');
             } else {
-                return $results;
+                echo "<div class='alert alert-danger m-5'>
+                    ". $results ."
+                </div>";
             }
         } catch (\Throwable $th) {
             //throw $th;
-            return null;
+            return "<div class='alert alert-danger m-5'>
+                SOMETHING HAS GONE WRONG IN DATABASE. PLEASE, TRY AGAIN OR LATER
+            </div>";
+        }
+    }
+
+    public function getGoods($id) {
+        try {
+            $connection = new SellerQueries;
+            $results = $connection->getGoods($id);
+            if(!empty($results)) {
+                echo '
+                    <div class="alert alert-warning m-5">
+                        YOUR GAIN: '. $results .'
+                    </div>
+                ';
+            } else {
+                echo '
+                    <div class="alert alert-warning m-5">
+                        YOUR GAIN: 0
+                    </div>
+                ';
+            }
+        } catch(\Throwable $th) {
+            echo '
+                <div class="alert alert-warning m-5">
+                    '. $th->getMessage() .'
+                </div>
+            ';
         }
     }
 }

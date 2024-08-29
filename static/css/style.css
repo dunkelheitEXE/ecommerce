@@ -29,6 +29,23 @@
     margin: 25px auto;
 }
 
+.special-object-5 {
+    width: 50%;
+    margin: 15px auto;
+}
+
+.special-object-3 {
+    width: 30%;
+    margin: 15px auto;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
 .boxer {
     position: absolute;
     width: 100%;
@@ -47,5 +64,18 @@
 @media screen and (max-width: 980px) {
     .special-form {
         width: 90%;
+    }
+
+    .special-object-5 {
+        width: 90%;
+    }
+
+    .special-object-3 {
+        width: 90%;
+    }
+
+    .flex-row {
+        flex-direction: column;
+        flex-wrap: wrap;
     }
 }

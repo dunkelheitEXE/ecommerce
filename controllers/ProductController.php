@@ -47,5 +47,25 @@ class ProductController {
             echo $th;
         }
     }
+
+    public function productMediaPrice() {
+        try {
+            $connection = new ProductQuery;
+            $results = $connection->productMediaPrice();
+            return $results['media_price'];
+        } catch(\Throwable $th) {
+            return $th;
+        }
+    }
+
+    public function productMinorPrice() {
+        try {
+            $connection = new ProductQuery;
+            $results = $connection->productMinorPrice();
+            return $results['minor'];
+        } catch(\Throwable $th) {
+            return $th;
+        }
+    }
 }
 ?>

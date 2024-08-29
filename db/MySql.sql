@@ -1,39 +1,47 @@
--- CREATE DATABASE ecommerce;
+CREATE DATABASE ecommerce;
 USE ecommerce;
 -- DROP DATABASE ecommerce;
 
 
+CREATE TABLE buyer(
+    buyer_id BIGINT NOT NULL AUTO_INCREMENT,
+    buyer_name VARCHAR(150) NOT NULL,
+    buyer_lastname VARCHAR(150) NOT NULL,
+    buyer_email VARCHAR(255) NOT NULL,
+    buyer_password VARCHAR(255) NOT NULL,
+    PRIMARY KEY(buyer_id)
+);
+ALTER TABLE buyer ADD buyer_photo VARCHAR(255) DEFAULT NULL AFTER buyer_email;
+
+
 -- DROP TABLE seller;
-CREATE TABLE user (
-    user_id BIGINT NOT NULL AUTO_INCREMENT,
-    user_name VARCHAR(100) NOT NULL,
-    user_lastname VARCHAR(100) NOT NULL,
-    user_phone VARCHAR(20) NOT NULL,
-    user_email VARCHAR(255) NOT NULL,
-    user_card VARCHAR(255) NOT NULL,
-    user_photo VARCHAR(255) DEFAULT '',
-    user_password VARCHAR(255) NOT NULL,
-    user_type VARCHAR(100) NOT NULL,
-    PRIMARY KEY(user_id)
+CREATE TABLE seller (
+    seller_id BIGINT NOT NULL AUTO_INCREMENT,
+    seller_name VARCHAR(100) NOT NULL,
+    seller_lastname VARCHAR(100) NOT NULL,
+    seller_phone VARCHAR(20) NOT NULL,
+    seller_email VARCHAR(255) NOT NULL,
+    seller_card VARCHAR(255) NOT NULL,
+    seller_photo VARCHAR(255) DEFAULT '',
+    seller_password VARCHAR(255) NOT NULL,
+    PRIMARY KEY(seller_id)
 );
 
-ALTER TABLE user MODIFY user_phone VARCHAR(20) DEFAULT NULL;
-ALTER TABLE user MODIFY user_card VARCHAR(255) DEFAULT NULL;
-
-ALTER TABLE user ADD user_country VARCHAR(100) DEFAULT NULL;
-ALTER TABLE user ADD FOREIGN KEY(user_country) REFERENCES countries(country_name)
+ALTER TABLE seller ADD seller_country VARCHAR(100) DEFAULT NULL;
+ALTER TABLE seller ADD FOREIGN KEY(seller_country) REFERENCES countries(country_name)
 ON DELETE CASCADE ON UPDATE CASCADE;
+-- ALTER TABLE seller DROP seller_type;
 
 -- DROP TABLE product;
 CREATE TABLE product(
     product_id BIGINT NOT NULL AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
+    seller_id BIGINT NOT NULL,
     product_name VARCHAR(100) NOT NULL,
     product_description VARCHAR(500) NOT NULL,
     product_price DOUBLE NOT NULL,
     product_type VARCHAR(100) NOT NULL,
     product_photo VARCHAR(255) DEFAULT NULL,
-    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (seller_id) REFERENCES seller(seller_id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY(product_id)
 );
 
@@ -48,22 +56,27 @@ CREATE TABLE countries (
     PRIMARY KEY(country_name)
 );
 
--- HOME WORK
-SELECT user_name FROM user WHERE user_id IN (SELECT user_id FROM product WHERE product_type = "device");
-SELECT user.user_id FROM user;
-DROP VIEW usuarios_productos;
-CREATE VIEW usuarios_productos AS SELECT user_id AS id, CONCAT(user_name, ' ', user_lastname) AS complete_name,
-(SELECT COUNT(product_name) FROM product WHERE user_id = id) AS productos_vendiendo FROM user;
-SELECT * FROM usuarios_productos;
+CREATE TABLE sale (
+	sale_seller bigint NOT NULL,
+    sale_product BIGINT NOT NULL,
+    foreign key(sale_seller) REFERENCES seller(seller_id),
+    foreign key(sale_product) REFERENCES product(product_id)
+);
+
+ALTER TABLE sale ADD sale_date DATE NOT NULL;
+ALTER TABLE sale ADD sale_buyer BIGINT NOT NULL AFTER sale_product;
+ALTER TABLE sale ADD FOREIGN KEY(sale_buyer) REFERENCES buyer(buyer_id);
+ALTER TABLE sale DROP CONSTRAINT sale_ibfk_3;
+ALTER TABLE sale ADD CONSTRAINT sale_ibfk_3 FOREIGN KEY(sale_buyer) REFERENCES buyer(buyer_id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- ***************ALTERS*****************
--- ALTER TABLE user ADD user_email VARCHAR(255) NOT NULL AFTER user_phone;
--- ALTER TABLE user ADD user_password VARCHAR(255) NOT NULL;
+-- ALTER TABLE seller ADD seller_email VARCHAR(255) NOT NULL AFTER seller_phone;
+-- ALTER TABLE seller ADD seller_password VARCHAR(255) NOT NULL;
 -- ALTER TABLE product ADD product_photo VARCHAR(255) DEFAULT NULL;
--- ALTER TABLE product ADD user_id BIGINT NOT NULL AFTER product_id;
--- ALTER TABLE product ADD FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE;
+-- ALTER TABLE product ADD seller_id BIGINT NOT NULL AFTER product_id;
+-- ALTER TABLE product ADD FOREIGN KEY (seller_id) REFERENCES seller(seller_id) ON DELETE CASCADE ON UPDATE CASCADE;
 -- ****************DELETES**********************
--- DELETE FROM user WHERE user_id = 3;
+-- DELETE FROM seller WHERE seller_id = 3;
 -- ***************DROPS****************************
 -- DROP TABLE sale;
 -- ****************SELECTS*****************
@@ -284,5 +297,41 @@ INSERT INTO countries (country_name) VALUES ('Yemen');
 INSERT INTO countries (country_name) VALUES ('Zambia');
 INSERT INTO countries (country_name) VALUES ('Zimbabwe');
 
-SELECT * FROM user;
+
+
+-- HOME WORK
+SELECT seller_name FROM seller WHERE seller_id IN (SELECT seller_id FROM product WHERE product_type = "device");
+SELECT seller.seller_id FROM seller;
+DROP VIEW usuarios_productos;
+CREATE VIEW usuarios_productos AS SELECT seller_id AS id, CONCAT(seller_name, ' ', seller_lastname) AS complete_name,
+(SELECT COUNT(product_name) FROM product WHERE seller_id = id) AS productos_vendiendo FROM seller;
+SELECT * FROM usuarios_productos;
+
+SELECT seller.seller_name, product.product_name, product.product_price
+FROM seller
+INNER JOIN product ON seller.seller_id = product.seller_id;
+
+SELECT seller.seller_name, product.product_name, product.product_price
+FROM seller
+LEFT JOIN product ON seller.seller_id = product.seller_id;
+
+SELECT product.product_name, product.product_price, seller.seller_name
+FROM product
+RIGHT JOIN seller ON seller.seller_id = product.seller_id;
+
+SELECT seller.seller_name, product.product_name, product.product_price, product.product_type
+FROM seller
+LEFT JOIN product ON seller.seller_id = product.seller_id
+
+UNION
+
+SELECT seller.seller_name, product.product_name, product.product_price, product.product_type
+FROM product
+RIGHT JOIN seller ON seller.seller_id = product.seller_id;
+
+
+SELECT * FROM seller;
 SELECT * FROM product;
+SELECT * FROM sale;
+SELECT * FROM countries;
+SELECT * FROM buyer;

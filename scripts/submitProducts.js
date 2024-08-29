@@ -36,7 +36,7 @@ function loadContent() {
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="editProduct.php?product_id=${element['product_id']}">Edit</a></div>
                                 <div class="text-center"><button class="btn btn-danger mt-4" onclick="deleteProduct(${element['product_id']})">Delete</button></div>
                             </div>
                         </div>

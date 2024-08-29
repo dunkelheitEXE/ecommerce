@@ -41,7 +41,6 @@ class ProductQuery extends ConnectDb{
             //code...
             $query = "SELECT * FROM product ORDER BY RAND() LIMIT 1";
             $stmt = $this->connection->prepare($query);
-            //$stmt->bindParam(':user_id', $id);
             if($stmt->execute()) {
                 $results = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $results;
@@ -51,6 +50,36 @@ class ProductQuery extends ConnectDb{
         } catch (\Throwable $th) {
             //throw $th;
             return "ERROR DB";
+        }
+    }
+
+    public function productMediaPrice() {
+        try {
+            $query = "SELECT AVG(product_price) AS media_price FROM product";
+            $stmt = $this->connection->prepare($query);
+            if($stmt->execute()) {
+                $results = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $results;
+            } else {
+                return array();
+            }
+        } catch(\Throwable $th) {
+            return array("media_price" => $th);
+        }
+    }
+
+    public function productMinorPrice() {
+        try {
+            $query = "SELECT MIN(product_price) AS minor FROM product";
+            $stmt = $this->connection->prepare($query);
+            if($stmt->execute()) {
+                $results = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $results;
+            } else {
+                return array();
+            }
+        } catch(\Throwable $th) {
+            return array("minor" => $th);
         }
     }
 }

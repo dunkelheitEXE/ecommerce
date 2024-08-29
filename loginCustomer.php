@@ -10,12 +10,14 @@ include('include/header.php');
 echo '<title>Login</title>';
 include('include/navbar.php');
 
+require "controllers/CustomerController.php";
+$newLogin = new CustomerController;
 if(isset($_POST['submit'])) {
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
-    $login->LogIn($email, $password);
+    $newLogin->loginCustomer($email, $password);
 }
 
-include('components/LogInCom.php');
+include('components/LoginCustomerCom.php');
 include('include/footer.php');
 ?>

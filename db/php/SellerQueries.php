@@ -1,10 +1,10 @@
 <?php
 
-class UserQuerys extends ConnectDb{
+class SellerQueries extends ConnectDb{
     public function verifyExistence($email) {
         try {
             //code...
-            $sql = "SELECT * FROM user WHERE user_email = :email";
+            $sql = "SELECT * FROM seller WHERE seller_email = :email";
             $stmt = $this->connection->prepare($sql);
             if($stmt->execute([":email" => $email])) {
                 $results = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -22,46 +22,44 @@ class UserQuerys extends ConnectDb{
         }
     }
     
-    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $userType, $country) {
+    public function SignUp($name, $lastname, $phone, $email, $card, $photo, $password, $country) {
         //code
         try {
             //code...
             $password_hashed = password_hash($password, PASSWORD_BCRYPT);
             $card_hashed = ConnectDb::EncryptData($card);
-            $sql = "INSERT INTO user (user_name, user_lastname, user_phone, user_email, user_card, user_photo, user_password, user_type, user_country)
-            VALUES(:user_name, :user_lastname, :user_phone, :user_email, :user_card, :user_photo, :user_password, :user_type, :user_country)";
+            $sql = "INSERT INTO seller (seller_name, seller_lastname, seller_phone, seller_email, seller_card, seller_photo, seller_password, seller_country)
+            VALUES(:seller_name, :seller_lastname, :seller_phone, :seller_email, :seller_card, :seller_photo, :seller_password, :seller_country)";
             $stmt = $this->connection->prepare($sql);
             $array = array(
-                ":user_name" => $name,
-                ":user_lastname" => $lastname,
-                ":user_phone" => $phone,
-                ":user_email" => $email,
-                ":user_card" => $card_hashed,
-                ":user_photo" => $photo,
-                ":user_password" => $password_hashed,
-                ":user_type" => $userType,
-                ":user_country" => $country
+                ":seller_name" => $name,
+                ":seller_lastname" => $lastname,
+                ":seller_phone" => $phone,
+                ":seller_email" => $email,
+                ":seller_card" => $card_hashed,
+                ":seller_photo" => $photo,
+                ":seller_password" => $password_hashed,
+                ":seller_country" => $country
             );
             if($stmt->execute($array)){
                 return "OK";
             } else {
-                return "ERROR";
+                return "SOME FIELD HAS NOT BEEN FILL IN CORRECTLY";
             }
         } catch (\Throwable $th) {
             //throw $th;
-            echo $th;
-            return "ERROR";
+            return $th;
         }
     }
 
     public function LogIn($email, $password) {
         try {
-            $sql = "SELECT * FROM user WHERE user_email = :email";
+            $sql = "SELECT * FROM seller WHERE seller_email = :email";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(':email', $email);
             if($stmt->execute()) {
                 $results = $stmt->fetch(PDO::FETCH_ASSOC);
-                if(count($results) > 0 && password_verify($password, $results['user_password'])) {
+                if(count($results) > 0 && password_verify($password, $results['seller_password'])) {
                     return $results;
                 } else {
                     return array();
@@ -74,12 +72,12 @@ class UserQuerys extends ConnectDb{
         }
     }
 
-    public function submitProduct($name, $description, $price, $type, $photo, $user) {
+    public function submitProduct($name, $description, $price, $type, $photo, $seller) {
         try {
-            $sql = "INSERT INTO product (user_id, product_name, product_description, product_price, product_type, product_photo) VALUES(:user_id, :product_name, :product_description, :product_price, :product_type, :product_photo)";
+            $sql = "INSERT INTO product (seller_id, product_name, product_description, product_price, product_type, product_photo) VALUES(:seller_id, :product_name, :product_description, :product_price, :product_type, :product_photo)";
             $stmt = $this->connection->prepare($sql);
             $array = array(
-                ":user_id" => $user,
+                ":seller_id" => $seller,
                 ":product_name" => $name,
                 ":product_description" => $description,
                 ":product_price" => $price,
@@ -100,9 +98,9 @@ class UserQuerys extends ConnectDb{
 
     public function getOwnProducts($id) {
         try {
-            $sql = "SELECT * FROM product WHERE user_id = :user_id";
+            $sql = "SELECT * FROM product WHERE seller_id = :seller_id";
             $stmt = $this->connection->prepare($sql);
-            $stmt->bindParam(":user_id", $id);
+            $stmt->bindParam(":seller_id", $id);
             if($stmt->execute()) {
                 $results = $stmt->fetchAll();
                 return $results;
@@ -151,42 +149,33 @@ class UserQuerys extends ConnectDb{
         }
     }
 
-    public function updateProduct($name, $photo, $description, $price, $type, $id) {
+    public function updateProduct($name, $description, $price, $type, $id) {
+        $concat = "";
         try {
             //code...
-            if($photo == '') {
-                $sql = "UPDATE product SET product_name = :product_name, product_description = :product_description, product_price = :product_price, product_type = :product_type";
-                $stmt = $this->connection->prepare($sql);
-                $array = array(
-                    ":product_name" => $name,
-                    ":product_description" => $description,
-                    ":product_price" => $price,
-                    ":product_type" => $type
-                );
-                if($stmt->execute($array)) {
-                    return "OK";
-                } else {
-                    return "ERROR";
-                }
+            $sql = "UPDATE product SET 
+            product_name = :product_name,
+            product_description = :product_description,
+            product_price = :product_price,
+            product_type = :product_type
+            WHERE product_id = :p_id";
+
+            $stmt = $this->connection->prepare($sql);
+            $array = array(
+                ":product_name" => $name,
+                ":product_description" => $description,
+                ":product_price" => $price,
+                ":product_type" => $type,
+                ":p_id" => $id
+            );
+            if($stmt->execute($array)) {
+                return "OK";
             } else {
-                $sql = "UPDATE product SET product_name = :product_name, product_description = :product_description, product_price = :product_price, product_type = :product_type, product_photo = :product_photo";
-                $stmt = $this->connection->prepare($sql);
-                $array = array(
-                    ":product_name" => $name,
-                    ":product_description" => $description,
-                    ":product_price" => $price,
-                    ":product_type" => $type,
-                    ":product_photo" => $photo
-                );
-                if($stmt->execute($array)) {
-                    return "OK";
-                } else {
-                    return "ERROR";
-                }
+                return "SOMETHING HAS GONE WRONG";
             }
         } catch (\Throwable $th) {
             //throw $th;
-            return null;
+            return $th->getMessage() . "\n" . $concat;
         }
     }
 
@@ -220,6 +209,22 @@ class UserQuerys extends ConnectDb{
         } catch(\Throwable $th) {
             echo $th;
             return null;
+        }
+    }
+
+    public function getGoods($id) {
+        try {
+            $query = "SELECT SUM(product_price) AS pricee FROM product WHERE product_id IN (SELECT sale_product FROM sale WHERE sale_seller = :seller_id)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bindParam(":seller_id", $id);
+            if($stmt->execute()) {
+                $results = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $results['pricee'];
+            } else {
+                return array();
+            }
+        } catch(\Throwable $th) {
+            return array("pricee" => "error => " . $th);
         }
     }
 }

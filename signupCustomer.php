@@ -19,8 +19,7 @@ if(isset($_POST['submit'])) {
     $country = $_POST['country'];
     $photo = $_FILES['photo']['name'];
     $file = $_FILES['photo']['tmp_name'];
-    $type = "customer";
-    $connection->signUpCustomer($name, $lastname, $email, $photo, $file, $password, $type);
+    $connection->signUpCustomer($name, $lastname, $email, $photo, $file, $password);
 }
 include("components/signupCustomerCom.php");
 include("include/footer.php");
